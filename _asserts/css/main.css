@@ -1,6 +1,7 @@
 body {
     display: flex;
     min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
     flex-direction: column;
     font-family: 'Noto Sans TC', sans-serif;
 }
@@ -17,8 +18,10 @@ header {
 }
 
 .header-inner h1 {
-    font-weight: bold;
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 900;
     text-shadow: 2.5px 2.5px 2px rgba(0,77,64 ,.5);
+    letter-spacing: 10px;
 }
 
 main {
@@ -53,3 +56,7 @@ main {
     letter-spacing: 3px;
 }
 
+.setting-modal-trigger i {
+    padding-left: 1rem;
+    vertical-align: sub;
+}

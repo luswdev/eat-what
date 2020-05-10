@@ -6,14 +6,14 @@
         <link rel="icon" type="image/png" href="/_asserts/img/favicon.png">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Varela+Round&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Noto+Serif+TC:wght@700&family=Varela+Round&display=swap" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" type="text/css">
         <link href="/_asserts/css/main.css" rel="stylesheet" type="text/css">
         <link href="/_asserts/css/helper.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
         <meta name="viewport" content="width=device-width, user-scalable=no" />
         <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"></script>
 	</head>
 <body class="center-align">
     <header>
@@ -36,14 +36,14 @@
                         <span>吃晚餐</span>
                     </label>
                 </span>
-                <a href="#setting-modal" class="gray-text modal-trigger"><i class="material-icons">settings</i></a>
+                <a href="#setting-modal" class="grey-text modal-trigger setting-modal-trigger"><i class="material-icons">settings</i></a>
             </form>            
             <a href="#restaurant-result" class="waves-effect waves-light btn-large modal-trigger choose-btn main-inner-item">幫我想</a>
         </div>
         <div id="restaurant-result" class="modal left-align">
             <div class="modal-content">
                 <h4>那就吃...</h4>
-                <p id="result" class="center-align"><b class="teal-text"></b>，你說好不好？</p>
+                <p id="result" class="center-align"><b class="teal-text"></b><span>，你說好不好？</span></p>
             </div>
             <div class="modal-footer">
                 <a href="#!" class="modal-close waves-effect waves-green btn-flat">好</a>
@@ -58,24 +58,19 @@
         </div>
     </footer>
     <div class="modal left-align" id="setting-modal">
-        <div class="modal-content" id="know-vue">
+        <div class="modal-content">
             <h4>我知道有這些東西可以吃喔</h4>
             <div class="know-list">
                 <div class="know-list-title">吃早餐</div>
-                <div class="chip" v-for="res in brunch">
-                    {{res}}
-                </div>
+                <div class="chips chips-initial" id="list-brunch"></div>
             </div>
-            <hr />
             <div class="know-list">
                 <div class="know-list-title">吃晚餐</div>
-                <div class="chip" v-for="res in dinner">
-                    {{res}}
-                </div>
+                <div class="chips chips-initial" id="list-dinner"></div>
             </div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">好</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">你好棒</a>
         </div>
     </div>
     <script src="/_asserts/js/main.js"></script>
