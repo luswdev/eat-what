@@ -21,6 +21,12 @@ $(document).ready( function () {
             pool = food.dinner;
         }
 
+        /* pool need to be exist and length must greater 0 */
+        if (!pool || !pool.length) {
+            $("#result").text("我也不知道吃啥，呵呵");
+            $("#restaurant-result .modal-close").text("幹");
+        }
+
         /* create a random index number */
         var pool_length = pool.length;
         var pool_index = random_range(pool_length)
@@ -47,11 +53,11 @@ function shuffle(array) {
 
 function split_str_add_dot(str) {
     let new_str = "";
-    for (let i = 0; i < str.length-1; i++) {
+    for (let i = 0; i < str.length - 1; i++) {
         new_str += str[i];
         new_str += "·";
     }
-    new_str += str[i];
+    new_str += str[str.length - 1];
 
     return new_str;
 }
