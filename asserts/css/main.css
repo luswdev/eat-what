@@ -39,11 +39,17 @@ main {
     padding: 2rem;
 }
 
+.page-footer {
+    font-family: 'Varela Round', sans-serif;
+    background: transparent;
+}
+
+.page-footer .footer-copyright {
+    background: transparent;
+}
+
 #restaurant-result #result b {
     font-size: 1.5em;
     letter-spacing: 3px;
 }
 
-.page-footer {
-    font-family: 'Varela Round', sans-serif;
-}
