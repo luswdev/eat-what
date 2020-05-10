@@ -2,6 +2,7 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    font-family: 'Noto Sans TC', sans-serif;
 }
 
 header {
@@ -41,4 +42,8 @@ main {
 #restaurant-result #result b {
     font-size: 1.5em;
     letter-spacing: 3px;
+}
+
+.page-footer {
+    font-family: 'Varela Round', sans-serif;
 }
