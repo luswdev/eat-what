@@ -6,8 +6,16 @@ body {
 
 header {
     flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
 }
 
 main {
     flex: 3 0 auto;
+}
+
+.main-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
