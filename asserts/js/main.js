@@ -30,7 +30,7 @@ $(document).ready( function () {
         var rastaurant = pool[pool_index];
         
         /* popup a result modal */
-        $("#result").text(rastaurant + '，你說好不好？');
+        $("#result span").text(rastaurant);
     });
 });
 
