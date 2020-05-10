@@ -4,6 +4,10 @@ body {
     flex-direction: column;
 }
 
-main {
+header {
     flex: 1 0 auto;
+}
+
+main {
+    flex: 3 0 auto;
 }

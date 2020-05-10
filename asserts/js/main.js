@@ -1,6 +1,8 @@
 'use strict';
 
 $(document).ready( function () {
+    $('.modal').modal();
+
     let food;
     $.getJSON("/data/food.json", function (json) {
         food = json;
@@ -22,7 +24,7 @@ $(document).ready( function () {
         var pool_index = random_range(pool_length)
 
         /* get current reataurant */
-        pool = shuffle(pool);
+        shuffle(pool);
         var rastaurant = pool[pool_index];
         
         $("#result").text(rastaurant);
@@ -38,7 +40,7 @@ function random_range(max) {
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
 }
