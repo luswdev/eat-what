@@ -30,7 +30,7 @@ $(document).ready( function () {
         var rastaurant = pool[pool_index];
         
         /* popup a result modal */
-        $("#result span").text(rastaurant);
+        $("#result b").text(rastaurant);
     });
 });
 

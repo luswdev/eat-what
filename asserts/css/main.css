@@ -15,6 +15,10 @@ header {
     align-self: center;
 }
 
+.header-inner h1 {
+    font-weight: bold;
+}
+
 main {
     flex: 3 0 auto;
 }
