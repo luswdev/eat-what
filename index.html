@@ -49,12 +49,33 @@
         </div>
     </main>
     <footer class="page-footer">
-        <div class="footer-copyright grey-text text-darken-2">
+        <div class="footer-copyright grey-text">
             <div class="container">
                 <span>&copy; 2020 LuSkywalker</span>
             </div>
         </div>
     </footer>
+    <div class="modal" id="setting-modal">
+        <div class="modal-content" id="know-vue">
+            <h4>我知道有這些東西可以吃喔</h4>
+            <div class="know-list">
+                <div class="know-list-title">吃早餐</div>
+                <div class="chip" v-for="res in brunch">
+                    {{res}}
+                </div>
+            </div>
+            <hr />
+            <div class="know-list">
+                <div class="know-list-title">吃晚餐</div>
+                <div class="chip" v-for="res in dinner">
+                    {{res}}
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">好</a>
+        </div>
+    </div>
     <script src="/asserts/js/main.js"></script>
 </body>
 </html>

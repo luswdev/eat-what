@@ -10,6 +10,14 @@ $(document).ready( function () {
         food = json;
     });
 
+    let lists = new Vue({
+        el: '#know-vue',
+        data: {
+            brunch: food.brunch,
+            dinner: food.brunch
+        }
+    });
+
     $(".choose-btn").on("click", function () {
         var which_index = $("#which-picker input").index($("#which-picker input:checked"));
 
