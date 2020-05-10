@@ -11,6 +11,10 @@ header {
     align-items: center;
 }
 
+.header-inner {
+    align-self: center;
+}
+
 main {
     flex: 3 0 auto;
 }
@@ -19,5 +23,8 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+}
+
+.main-inner .main-inner-item {
+    align-self: center;
 }

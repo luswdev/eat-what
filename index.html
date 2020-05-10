@@ -16,11 +16,13 @@
 	</head>
 <body class="center-align">
     <header>
-        <h3>我想吃</h3>
+        <div class="header-inner">
+            <h3>我想吃</h3>
+        </div>
     </header>
     <main class="container">
         <div class="main-inner">
-            <form action="#" id="which-picker">
+            <form action="#" id="which-picker" class="main-inner-item">
                 <span>
                     <label>
                         <input name="which" type="radio" checked />
@@ -34,7 +36,7 @@
                     </label>
                 </span>
             </form>            
-            <a class="waves-effect waves-light btn-large choose-btn">幫我想</a>
+            <a class="waves-effect waves-light btn-large choose-btn main-inner-item">幫我想</a>
         </div>
         <div id="restaurant-result" class="modal">
             <div class="modal-content">
