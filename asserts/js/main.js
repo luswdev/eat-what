@@ -30,7 +30,7 @@ $(document).ready( function () {
         var rastaurant = pool[pool_index];
         
         /* popup a result modal */
-        $("#result b").text(rastaurant);
+        $("#result b").text(split_str_add_dot(rastaurant));
     });
 });
 
@@ -43,4 +43,15 @@ function shuffle(array) {
         let j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
+}
+
+function split_str_add_dot(str) {
+    let new_str = "";
+    for (let i = 0; i < str.length-1; i++) {
+        new_str += str[i];
+        new_str += "·";
+    }
+    new_str += str[i];
+
+    return new_str;
 }
