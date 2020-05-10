@@ -1,8 +1,10 @@
 'use strict';
 
 $(document).ready( function () {
+    /* initial all modals */
     $('.modal').modal();
 
+    /* get data from JSON */
     let food;
     $.getJSON("/data/food.json", function (json) {
         food = json;
@@ -27,10 +29,8 @@ $(document).ready( function () {
         shuffle(pool);
         var rastaurant = pool[pool_index];
         
+        /* popup a result modal */
         $("#result").text(rastaurant + '，你說好不好？');
-        var elem = document.getElementById('restaurant-result');
-        var instance = M.Modal.getInstance(elem);
-        instance.open();
     });
 });
 
