@@ -25,8 +25,10 @@ $(document).ready( function () {
         pool = shuffle(pool);
         var rastaurant = pool[pool_index];
         
-
-        $(".main-inner").append(rastaurant);
+        $("#result").text(rastaurant);
+        var elem = document.getElementById('#restaurant-result');
+        var instance = M.Modal.getInstance(elem);
+        instance.open();
     });
 });
 
