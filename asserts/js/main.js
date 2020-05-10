@@ -19,7 +19,7 @@ $(document).ready( function () {
 
         /* create a random index number */
         var pool_length = pool.length;
-        var pool_index = Math.randomInt(pool_length)
+        var pool_index = random_range(pool_length)
 
         /* get current reataurant */
         pool = shuffle(pool);
@@ -31,6 +31,10 @@ $(document).ready( function () {
         instance.open();
     });
 });
+
+function random_range(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
