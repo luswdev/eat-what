@@ -6,7 +6,7 @@ $(document).ready( function () {
 
     /* get data from JSON */
     let food;
-    $.getJSON("/data/food.json", function (json) {
+    $.getJSON("/_data/food.json", function (json) {
         food = json;
     });
 
