@@ -1,3 +1,8 @@
+html {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
 body {
     display: flex;
     min-height: 100vh;
@@ -20,7 +25,8 @@ header {
 .header-inner h1 {
     font-family: 'Noto Serif TC', serif;
     font-weight: 900;
-    text-shadow: 2.5px 2.5px 2px rgba(0,77,64 ,.5);
+    color: var(--header-color);
+    text-shadow: 2.5px 2.5px 2px rgba(158,158,158 ,.5);
     letter-spacing: 10px;
 }
 
@@ -51,6 +57,20 @@ main {
     background: transparent;
 }
 
+.modal {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
+.modal .modal-footer {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
+.modal .modal-footer a {
+    color: var(--primary-color);
+}
+
 #restaurant-result #result b {
     font-size: 1.5em;
     letter-spacing: 3px;
@@ -59,4 +79,17 @@ main {
 .setting-modal-trigger i {
     padding-left: 1rem;
     vertical-align: sub;
+}
+
+.chips .input {
+    color: var(--label-color);
+}
+
+.chips .input::placeholder {
+    color: var(--placeholder-color);
+}
+
+.chip {
+    background-color: var(--secondary-bg);
+    color: var(--secondary-color);
 }
