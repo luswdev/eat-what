@@ -27,8 +27,8 @@ $(document).ready( function () {
         shuffle(pool);
         var rastaurant = pool[pool_index];
         
-        $("#result").text(rastaurant);
-        var elem = document.getElementById('restaurant-result' + '，你說好不好？');
+        $("#result").text(rastaurant + '，你說好不好？');
+        var elem = document.getElementById('restaurant-result');
         var instance = M.Modal.getInstance(elem);
         instance.open();
     });
