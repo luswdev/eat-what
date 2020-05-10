@@ -12,7 +12,7 @@ $(document).ready( function () {
     $('#restaurant-result').modal();
     $('#setting-modal').modal({
         onCloseEnd: function () {
-            window.location.reload();
+            window.location.href = '/';
         }
     });
 
