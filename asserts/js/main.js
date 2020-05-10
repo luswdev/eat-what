@@ -28,7 +28,7 @@ $(document).ready( function () {
         var rastaurant = pool[pool_index];
         
         $("#result").text(rastaurant);
-        var elem = document.getElementById('#restaurant-result');
+        var elem = document.getElementById('restaurant-result');
         var instance = M.Modal.getInstance(elem);
         instance.open();
     });
