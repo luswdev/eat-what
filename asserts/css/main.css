@@ -28,3 +28,7 @@ main {
 .main-inner .main-inner-item {
     align-self: center;
 }
+
+.main-inner #restaurant-picker {
+    padding: 2rem;
+}
