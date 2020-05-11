@@ -54,15 +54,9 @@ $(document).ready( function () {
         });
 
         $(".choose-btn").on("click", function () {
-            var which_index = $("#which-picker input").index($("#which-picker input:checked"));
-    
             /* get right restaurants pool */
-            var pool;
-            if (which_index == 0) {
-                pool = food.brunch;
-            } else {
-                pool = food.dinner;
-            }
+            var which_index = $("#which-picker input").index($("#which-picker input:checked"));
+            var pool = which_index ? food.dinner : food.brunch;;
     
             /* pool need to be exist and length must greater 0 */
             if (!pool || !pool.length) {
@@ -71,14 +65,11 @@ $(document).ready( function () {
                 $("#restaurant-result .modal-close").text("幹");
 
                 return;
-            }
-    
-            /* create a random index number */
-            var pool_length = pool.length;
-            var pool_index = random_range(pool_length)
-    
-            /* get current reataurant */
+            }    
+
+            /* get random reataurant */
             shuffle(pool);
+            var pool_index = random_range(pool.length)
             var rastaurant = pool[pool_index];
             
             /* popup a result modal */
@@ -122,7 +113,7 @@ function split_str_add_dot(str) {
 
 /* general on chip add callback function */
 function add_chip_callback(e, chip) {
-    let newest = chip.innerHTML.replace('<i class="material-icons close">close</i>',"")
+    let newest = chip.innerHTML.replace('<i class="material-icons close">close</i>',"");
     let type = $(e).is("#list-brunch") ? 'brunch' : "dinner";
 
     /* execute add chip */
@@ -138,7 +129,7 @@ function add_chip_callback(e, chip) {
 
 /* general on chip delete callback function */
 function delete_chip_callback(e, chip) {
-    let del = chip.innerHTML.replace('<i class="material-icons close">close</i>',"")
+    let del = chip.innerHTML.replace('<i class="material-icons close">close</i>',"");
     let type = $(e).is("#list-brunch") ? 'brunch' : "dinner";
 
     /* execute delete chip */
@@ -148,7 +139,7 @@ function delete_chip_callback(e, chip) {
         data: { "del": del, "type": type, "code": "delete-chip-code"},
         success: function (res) {
             console.log(res);
-            $(".chips").find("input").blur()
+            $(".chips").find("input").blur();
         }
     });
 }

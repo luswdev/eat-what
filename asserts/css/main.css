@@ -52,12 +52,9 @@ main {
     padding-left: 1rem;
 }
 
-.page-footer {
-    font-size: .9rem;
-    background: transparent;
-}
-
+.page-footer,
 .page-footer .footer-copyright {
+    font-size: .9rem;
     background: transparent;
 }
 
