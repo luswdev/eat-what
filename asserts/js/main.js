@@ -22,7 +22,7 @@ $(document).ready( function () {
     }
 
     /* get data from JSON */
-    $.getJSON(`data/food.json?nocache=${(new Date()).getTime()}`, function(json) {
+    $.getJSON(`/data/food.json?nocache=${(new Date()).getTime()}`, function(json) {
         let food = json;
 
         /* initial brunch list */
