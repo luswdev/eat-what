@@ -13,6 +13,14 @@ $(document).ready( function () {
         }
     });
 
+    /* check type by time default */
+    let time = new Date().getHours()
+    if (time > 16 || time < 2) {
+        $('#which-picker span:last-child input').prop("checked", true);
+    } else {
+        $('#which-picker span:first-child input').prop("checked", true);
+    }
+
     /* get data from JSON */
     $.getJSON(`data/food.json?nocache=${(new Date()).getTime()}`, function(json) {
         let food = json;
@@ -75,7 +83,7 @@ $(document).ready( function () {
             
             /* popup a result modal */
             $("#result span").text("，你說好不好？");
-            $("#result b").text(split_str_add_dot(rastaurant));
+            $("#result b").text(rastaurant);
             $("#restaurant-result .modal-close").text("好");
         });
     }); 

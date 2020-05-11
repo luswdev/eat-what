@@ -48,6 +48,10 @@ main {
     padding: 2rem;
 }
 
+.main-inner #which-picker > span:nth-child(2) {
+    padding-left: 1rem;
+}
+
 .page-footer {
     font-size: .9rem;
     background: transparent;
@@ -60,6 +64,8 @@ main {
 .modal {
     background-color: var(--bg-color);
     color: var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 0 12px var(--shadow-color);
 }
 
 .modal .modal-footer {
