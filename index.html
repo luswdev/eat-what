@@ -3,6 +3,7 @@
 	<head>
         <title>吃什麼</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
         <link rel="icon" type="image/png" href="/asserts/img/favicon.png">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -10,7 +11,6 @@
         <link href="//fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" type="text/css">
         <link href="/asserts/css/helper.css" rel="stylesheet" type="text/css">
         <link href="/asserts/css/main.css" rel="stylesheet" type="text/css">
-        <meta name="viewport" content="width=device-width, user-scalable=no" />
         <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	</head>
@@ -39,6 +39,8 @@
             </form>            
             <a href="#restaurant-result" class="waves-effect waves-light btn-large modal-trigger choose-btn main-inner-item">幫我想</a>
         </div>
+
+        <!-- Result modal -->
         <div id="restaurant-result" class="modal left-align">
             <div class="modal-content">
                 <h4>那就吃...</h4>
@@ -56,6 +58,8 @@
             </div>
         </div>
     </footer>
+
+    <!-- Setting modal -->
     <div class="modal left-align" id="setting-modal">
         <div class="modal-content">
             <h4>我知道有這些東西可以吃喔</h4>
@@ -72,6 +76,7 @@
             <a class="modal-close waves-effect waves-light btn-flat">你好棒</a>
         </div>
     </div>
+
     <script src="/asserts/js/main.js?nocache=202005111050"></script>
 </body>
 </html>
