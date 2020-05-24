@@ -13,6 +13,8 @@ git clone https://github.com/luswdev/eat-what.git
 - Then setup apache/nginx yourself.
 
 ## Change Log
+- v1.0.3
+    - 增加了快速鍵支援：enter 鍵現在能快速地開啟/關閉結果
 - v1.0.2
     - 小精靈知道你要吃哪一餐了
 - v1.0.1
