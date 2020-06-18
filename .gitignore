@@ -1,1 +1,2 @@
-data/food.json
+data/*.json
+phpmyadmin/
