@@ -3,6 +3,7 @@
 
 ## Feature
 - 幫你想要吃什麼啦
+- 分享幫你想的餐廳啦
 
 ## How to Use
 - Clone
