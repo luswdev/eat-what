@@ -96,3 +96,16 @@ main {
     background-color: var(--secondary-bg);
     color: var(--secondary-color);
 }
+
+tr {
+    border-color: var(--table-border-color);
+}
+
+.share-btn-box {
+    margin-top: 1rem;
+}
+
+input#share-url {
+    position: fixed;
+    top: -10%;
+}

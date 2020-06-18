@@ -38,20 +38,20 @@ $(document).ready( function () {
     }
 
     /* get data from JSON */
-    $.getJSON(`/data/food.json?nocache=${(new Date()).getTime()}`, function(json) {
+    $.getJSON(`/exec/get-res.php?nocache=${(new Date()).getTime()}`, function(json) {
         /* copy data into global variable `food` */
         food = json;
 
         /* initial brunch list */
         let brunch = [];
         for (let i = 0; i < food.brunch.length; i++) {
-            brunch.push({tag: food.brunch[i]});
+            brunch.push({tag: food.brunch[i].restaurant});
         }
 
         /* initial dinner list */
         let dinner = [];
         for (let i = 0; i < food.dinner.length; i++) {
-            dinner.push({'tag': food.dinner[i]});
+            dinner.push({'tag': food.dinner[i].restaurant});
         }
 
         /* initial brunch chips */
@@ -88,6 +88,35 @@ $(document).ready( function () {
         }
     });
 
+    /* get log */
+    $.ajax("/exec/get-log.php")
+    .done(function(res) {
+        $(".log-body").empty().append(res);
+    })
+
+    /* get share result */
+    let pid = window.location.href.split("?").length > 1 ? window.location.href.split("?")[1].split("=")[1] : 0;
+    $.ajax({
+        type: "POST",
+        url: "/exec/get-share.php",
+        data: { "pid": parseInt(pid, 10)}
+    })
+    .done(function(res) {
+        $(".share-body").empty().append(res);
+    });
+
+    /* copy url */
+    $(".share-btn-box button").on("click", function() {
+        $('#share-url')[0].value = window.location.href;
+        let copy_buf = document.querySelector('#share-url');
+        copy_buf.select();
+        if (document.execCommand('copy')) {
+            M.toast({html: '成功複製連結'});
+        } else {
+            M.toast({html: '出錯了啦'});
+        }
+        $(document).find("input").blur();
+    });
 });
 
 /* fixed vh for mobile via css */
@@ -134,8 +163,8 @@ function add_chip_callback(e, chip)
     /* execute add chip */
     $.ajax({
         type: "POST",
-        url: "/exec/add-entry.php",
-        data: { "new": newest, "type": type, "code": "add-chip-code"},
+        url: "/exec/add-res.php",
+        data: { "new": newest, "when": type, "code": "add-chip-code"},
         success: function (res) {
             console.log(res);
         }
@@ -151,8 +180,8 @@ function delete_chip_callback(e, chip)
     /* execute delete chip */
     $.ajax({
         type: "POST",
-        url: "/exec/delete-entry.php",
-        data: { "del": del, "type": type, "code": "delete-chip-code"},
+        url: "/exec/del-res.php",
+        data: { "res": del, "code": "delete-chip-code"},
         success: function (res) {
             console.log(res);
             $(".chips").find("input").blur();
@@ -190,10 +219,20 @@ function create_random_restaurant()
     /* get random restaurant */
     shuffle(pool);
     var pool_index = random_range(pool.length)
-    var rastaurant = pool[pool_index];
+    var rastaurant = pool[pool_index].restaurant;
     
     /* popup a result modal */
     $("#result span").text("，你說好不好？");
     $("#result b").text(rastaurant);
     $("#restaurant-result .modal-close").text("好");
+
+    /* execute add log */
+    $.ajax({
+        type: "POST",
+        url: "/exec/add-log.php",
+        data: { "rid": pool[pool_index].rid},
+        success: function (res) {
+            $(".share-res").attr({"href": `/share/?pid=${res}`});
+        }
+    });
 }

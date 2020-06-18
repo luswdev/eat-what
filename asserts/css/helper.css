@@ -9,6 +9,7 @@
         --placeholder-color: #515151;
         --header-color: #9e9e9e;
         --shadow-color: rgba(255,255,255,.175);
+        --table-border-color: rgba(255,255,255,0.12);
     }
   
 }
@@ -24,5 +25,12 @@
         --placeholder-color: #d1d1d1;
         --header-color: #009688;
         --shadow-color: rgba(0,0,0,.175)
+        --table-border-color: rgba(0,0,0,0.12);
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    table.responsive-table thead {
+        border-color: var(--table-border-color);
     }
 }
