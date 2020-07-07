@@ -6,7 +6,7 @@ $DBPASS = $config->db->password;
 $DBNAME = $config->db->table;
 
 $mysqli = new mysqli($DBHOST, $DBUSER, $DBPASS, $DBNAME);
-$sql = "SELECT a.pid, b.restaurant, b.open_time, a.pick_time, a.picker_ip FROM picked_log AS a LEFT JOIN restaurant_lists AS b ON a.rid = b.rid ORDER BY pid ASC";
+$sql = "SELECT a.pid, b.restaurant, b.open_time, a.pick_time, a.picker_ip FROM picked_log AS a LEFT JOIN restaurant_lists AS b ON a.rid = b.rid ORDER BY pid DESC";
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
 $stmt->bind_result($pid, $res, $when, $time, $ip);

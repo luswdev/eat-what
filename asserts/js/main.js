@@ -199,6 +199,7 @@ function create_random_restaurant()
         $("#result span").text("");
         $("#result b").text("自己想啦幹");
         $("#restaurant-result .modal-close").text("幹");
+        $(".share-res").hide();
 
         return;
     }
@@ -212,6 +213,7 @@ function create_random_restaurant()
         $("#result span").text("我也不知道吃啥，呵呵");
         $("#result b").text("");
         $("#restaurant-result .modal-close").text("幹");
+        $(".share-res").hide();
 
         return;
     }    
@@ -225,6 +227,7 @@ function create_random_restaurant()
     $("#result span").text("，你說好不好？");
     $("#result b").text(rastaurant);
     $("#restaurant-result .modal-close").text("好");
+    $(".share-res").show();
 
     /* execute add log */
     $.ajax({

@@ -1,6 +1,8 @@
 # 吃什麼
 幫我想今天要吃啥
 
+![](https://i.imgur.com/I8zwf9L.png)
+
 ## Feature
 - 幫你想要吃什麼啦
 - 分享幫你想的餐廳啦
