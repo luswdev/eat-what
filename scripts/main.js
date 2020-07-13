@@ -38,7 +38,7 @@ $(document).ready( function () {
     }
 
     /* get data from JSON */
-    $.getJSON(`/exec/get-res.php?nocache=${(new Date()).getTime()}`, function(json) {
+    $.getJSON(`/api/get-res.php?nocache=${(new Date()).getTime()}`, function(json) {
         /* copy data into global variable `food` */
         food = json;
 
@@ -89,7 +89,7 @@ $(document).ready( function () {
     });
 
     /* get log */
-    $.ajax("/exec/get-log.php")
+    $.ajax("/api/get-log.php")
     .done(function(res) {
         $(".log-body").empty().append(res);
     })
@@ -98,7 +98,7 @@ $(document).ready( function () {
     let pid = window.location.href.split("?").length > 1 ? window.location.href.split("?")[1].split("=")[1] : 0;
     $.ajax({
         type: "POST",
-        url: "/exec/get-share.php",
+        url: "/api/get-share.php",
         data: { "pid": parseInt(pid, 10)}
     })
     .done(function(res) {
@@ -163,7 +163,7 @@ function add_chip_callback(e, chip)
     /* execute add chip */
     $.ajax({
         type: "POST",
-        url: "/exec/add-res.php",
+        url: "/api/add-res.php",
         data: { "new": newest, "when": type, "code": "add-chip-code"},
         success: function (res) {
             console.log(res);
@@ -180,7 +180,7 @@ function delete_chip_callback(e, chip)
     /* execute delete chip */
     $.ajax({
         type: "POST",
-        url: "/exec/del-res.php",
+        url: "/api/del-res.php",
         data: { "res": del, "code": "delete-chip-code"},
         success: function (res) {
             console.log(res);
@@ -232,7 +232,7 @@ function create_random_restaurant()
     /* execute add log */
     $.ajax({
         type: "POST",
-        url: "/exec/add-log.php",
+        url: "/api/add-log.php",
         data: { "rid": pool[pool_index].rid},
         success: function (res) {
             $(".share-res").attr({"href": `/share/?pid=${res}`});
