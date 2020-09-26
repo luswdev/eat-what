@@ -1,0 +1,10 @@
+Redirect 403 /eat/data/config.json
+
+RewriteEngine On
+RewriteBase /eat
+RewriteRule ^picked-log/*$ picked-log.html [NC,L]
+RewriteRule ^share/*$ share.html [NC,L]
+RewriteRule ^share/([0-9]+)$  share.html?pid=$1 [NC,L]
+RewriteRule ^api/log$ api/log.php [NC,L]
+RewriteRule ^api/log/([0-9]+)$ api/log.php?pid=$1 [NC,L]
+RewriteRule ^api/res$ api/res.php [NC,L]

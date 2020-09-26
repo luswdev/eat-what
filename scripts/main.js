@@ -8,7 +8,7 @@
 let food;
 
 $(document).ready( function () {
-    /* fixed wheater mobile 100vh will overflow */
+    /* fixed wheatear mobile 100vh will overflow */
     set_vh();
     window.addEventListener('resize', set_vh);
 
@@ -20,7 +20,7 @@ $(document).ready( function () {
     /* initial setting modal */
     $('#setting-modal').modal({
         onCloseEnd: function () {
-            window.location.href = '/';
+            window.location.href = '/eat/';
         }
     });
 
@@ -38,7 +38,7 @@ $(document).ready( function () {
     }
 
     /* get data from JSON */
-    $.getJSON(`/api/get-res.php?nocache=${(new Date()).getTime()}`, function(json) {
+    $.getJSON(`/eat/api/res`, function(json) {
         /* copy data into global variable `food` */
         food = json;
 
@@ -89,21 +89,22 @@ $(document).ready( function () {
     });
 
     /* get log */
-    $.ajax("/api/get-log.php")
+    $.ajax("/eat/api/log")
     .done(function(res) {
         $(".log-body").empty().append(res);
     })
 
     /* get share result */
-    let pid = window.location.href.split("?").length > 1 ? window.location.href.split("?")[1].split("=")[1] : 0;
-    $.ajax({
-        type: "POST",
-        url: "/api/get-share.php",
-        data: { "pid": parseInt(pid, 10)}
-    })
-    .done(function(res) {
-        $(".share-body").empty().append(res);
-    });
+    let pid = window.location.href.split("/").length > 5 ? window.location.href.split("/")[5] : NaN
+    if (!isNaN(parseInt(pid, 10))) {
+        $.ajax({
+            type: "GET",
+            url: `/eat/api/log/${parseInt(pid, 10)}`
+        })
+        .done(function(res) {
+            $(".share-body").empty().append(res);
+        });
+    }
 
     /* copy url */
     $(".share-btn-box button").on("click", function() {
@@ -163,7 +164,7 @@ function add_chip_callback(e, chip)
     /* execute add chip */
     $.ajax({
         type: "POST",
-        url: "/api/add-res.php",
+        url: "/eat/api/res",
         data: { "new": newest, "when": type, "code": "add-chip-code"},
         success: function (res) {
             console.log(res);
@@ -179,8 +180,8 @@ function delete_chip_callback(e, chip)
 
     /* execute delete chip */
     $.ajax({
-        type: "POST",
-        url: "/api/del-res.php",
+        type: "DELETE",
+        url: "/eat/api/res",
         data: { "res": del, "code": "delete-chip-code"},
         success: function (res) {
             console.log(res);
@@ -232,10 +233,10 @@ function create_random_restaurant()
     /* execute add log */
     $.ajax({
         type: "POST",
-        url: "/api/add-log.php",
+        url: "/eat/api/log",
         data: { "rid": pool[pool_index].rid},
         success: function (res) {
-            $(".share-res").attr({"href": `/share/?pid=${res}`});
+            $(".share-res").attr({"href": `/eat/share/${res}`});
         }
     });
 }
