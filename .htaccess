@@ -3,9 +3,8 @@ Redirect 403 /eat/data/
 
 RewriteEngine On
 RewriteBase /eat
-RewriteRule ^picked-log/*$ views/picked-log.html [NC,L]
-RewriteRule ^share/*$ views/share.html [NC,L]
-RewriteRule ^share/([0-9]+)$  views/share.html?pid=$1 [NC,L]
 RewriteRule ^api/log$ api/log.php [NC,L]
 RewriteRule ^api/log/([0-9]+)$ api/log.php?pid=$1 [NC,L]
 RewriteRule ^api/res$ api/res.php [NC,L]
+RewriteRule ^api/res/([\w]+)$ api/res.php?list=$1 [NC,L]
+RewriteRule ^api/reg$ api/reg.php [NC,L]

@@ -1,111 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Open+Sans:wght@400;600;800&family=Roboto+Mono:ital@0;1&display=swap');
+
 html {
-    background-color: var(--bg-color);
-    color: var(--primary-color);
+    font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
 }
 
-body {
-    display: flex;
-    min-height: 100vh;
-    min-height: calc(var(--vh, 1vh) * 100);
-    flex-direction: column;
-    font-family: 'Noto Sans TC', sans-serif;
-}
-
-header {
-    flex: 1 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.header-inner {
-    align-self: center;
-}
-
-.header-inner h1 {
-    font-family: 'Noto Serif TC', serif;
-    font-weight: 900;
-    color: var(--header-color);
-    text-shadow: 2.5px 2.5px 2px rgba(158,158,158 ,.5);
-    letter-spacing: 10px;
+header .navbar-brand {
+    font-weight: 800;
 }
 
 main {
-    flex: 3 0 auto;
+    flex: 1 0 auto;
 }
 
-.main-inner {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+footer {
+    font-size: .8rem;
 }
 
-.main-inner .main-inner-item {
-    align-self: center;
+.btn-close {
+    opacity: 0;
 }
 
-.main-inner #which-picker {
-    padding: 2rem;
+.list-group-item:hover .btn-close,
+tr:hover .btn-close {
+    opacity: .5;
 }
 
-.main-inner #which-picker > span:nth-child(2) {
-    padding-left: 1rem;
+tbody, td, tfoot, th, thead, tr {
+    word-break: keep-all;
 }
 
-.page-footer,
-.page-footer .footer-copyright {
-    font-size: .9rem;
-    background: transparent;
-}
-
-.modal {
-    background-color: var(--bg-color);
-    color: var(--primary-color);
-    border-radius: 10px;
-    box-shadow: 0 0 12px var(--shadow-color);
-}
-
-.modal .modal-footer {
-    background-color: var(--bg-color);
-    color: var(--primary-color);
-}
-
-.modal .modal-footer a {
-    color: var(--primary-color);
-}
-
-#restaurant-result #result b {
-    font-size: 1.5em;
+.result-name {
+    font-size: 1.5rem;
     letter-spacing: 3px;
+    color: #3085d6;
 }
 
-.setting-modal-trigger i {
-    padding-left: 1rem;
-    vertical-align: sub;
+li.list-group-item {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
-.chips .input {
-    color: var(--label-color);
+.list-group-item .btn-close {
+    position: absolute;
+    right: 3%;
 }
 
-.chips .input::placeholder {
-    color: var(--placeholder-color);
-}
-
-.chip {
-    background-color: var(--secondary-bg);
-    color: var(--secondary-color);
-}
-
-tr {
-    border-color: var(--table-border-color);
-}
-
-.share-btn-box {
-    margin-top: 1rem;
-}
-
-input#share-url {
-    position: fixed;
-    top: -10%;
+.restuarant-name {
+    width: 90%;
 }
