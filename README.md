@@ -1,8 +1,6 @@
 # 吃什麼
 幫我想今天要吃啥
 
-![](https://i.imgur.com/I8zwf9L.png)
-
 ## Feature
 - 幫你想要吃什麼啦
 - 分享幫你想的餐廳啦
@@ -17,6 +15,8 @@ git clone https://github.com/luswdev/eat-what.git
 - Then setup apache/nginx yourself.
 
 ## Change Log
+- v2.0.0
+    - 全新介面啦
 - v1.1.0
     - 小精靈把資料存到資料庫裡了
     - 現在可以快速的分享結果
