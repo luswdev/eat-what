@@ -3,7 +3,6 @@
 
 ## Feature
 - 幫你想要吃什麼啦
-- 分享幫你想的餐廳啦
 - 紀錄想到的餐廳啦
 
 ## How to Use
@@ -17,6 +16,7 @@ git clone https://github.com/luswdev/eat-what.git
 ## Change Log
 - v2.0.0
     - 全新介面啦
+    - 新增區域設定
 - v1.1.0
     - 小精靈把資料存到資料庫裡了
     - 現在可以快速的分享結果
