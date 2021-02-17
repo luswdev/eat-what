@@ -4,39 +4,37 @@
         <title>吃什麼</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no" />
-        <link rel="icon" type="image/png" href="/eat/images/favicon.png">
+        <link rel="icon" type="image/png" href="images/favicon.png">
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="//fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet">
-        <link href="//fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" type="text/css">
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <!-- JavaScript -->
+        <script src="//cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/7205443a15.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="//kit.fontawesome.com/7205443a15.js" crossorigin="anonymous"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="//cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-        <link href="styles/main.css?v=2102291735" rel="stylesheet" type="text/css">
+        <!-- CSS -->
+        <link href="//cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link href="styles/main.css?v=2102171618" rel="stylesheet" type="text/css">
+        <link href="styles/helper.css?v=2102140239" rel="stylesheet" type="text/css">
 	</head>
 <body class="min-vh-100 d-flex flex-column">
     <header id="vue-header">
-        <div class="pos-f-t">
-            <nav class="navbar navbar-expand navbar-light py-3 bg-light">
-                <div class="container">
-                    <span class="navbar-brand mb-0 h1 mr-0 mr-md-2">
-                        <b>
-                            <i v-if="pick=='brunch'" class="fas fa-bread-slice"></i>
-                            <i v-else class="fas fa-hamburger"></i>
-                            吃什麼
-                        </b>
-                    </span>
-                </div>
-            </nav>
-        </div>
+        <nav class="navbar navbar-expand py-3" :class="darkTheme ? 'bg-dark navbar-dark' : 'bg-light navbar-light'">
+            <div class="container">
+                <span class="navbar-brand mb-0 h1 mr-0 mr-md-2">
+                    <i v-if="picked=='brunch'" class="fas fa-bread-slice"></i>
+                    <i v-else class="fas fa-hamburger"></i>
+                    吃什麼
+                </span>
+            </div>
+        </nav>
     </header>
+
     <main class="container" id="app">
         <div class="main-inner">
+
+            <!-- picker option card -->
             <div class="card my-4">
                 <div class="card-body">
                     <h5 class="card-title">
@@ -45,33 +43,35 @@
                     </h5>
                     <div class="row g-2">
                         <div class="form-floating col-md-8">
-                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example" v-model="selected_list" @change="ChangeRegion">
-                                <option v-for="list in restuarant_list" :value="list.name">{{list.title}}</option>
+                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example" v-model="selectedRegion" @change="ChangeRegion">
+                                <option v-for="list in regionList" :value="list.name">{{list.title}}</option>
                             </select>
                             <label for="floatingSelect">選擇區域</label>
                         </div>
                         <div class="col-md-4 text-end">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="brunch" v-model="pick" v-bind:value="pick_brunch" @change="PickChange" checked>
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="brunch" v-model="picked.current" v-bind:value="picked.brunch" @change="PickChange" checked>
                                 <label class="form-check-label" for="inlineRadio1">吃早餐</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="dinner" v-model="pick" v-bind:value="pick_dinner" @change="PickChange">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="dinner" v-model="picked.current" v-bind:value="picked.dinner" @change="PickChange">
                                 <label class="form-check-label" for="inlineRadio2">吃晚餐</label>
                             </div>     
-                            <a href="#!" class="btn mr-1 btn-primary" @click="ShowResult">幫我想！</a>
+                            <button class="btn mr-1 btn-primary" @click="ShowResult" :disabled="started == 0">幫我想！</button>
                         </div>        
                     </div>                    
                 </div>
             </div>
+
+            <!-- history card -->
             <div class="card my-4">
                 <div class="card-body">                    
                     <h5 class="card-title">
                         <i class="fas fa-clock"></i> 
-                        我決定了 {{full_history.length}} 次！
+                        我決定了 {{histories.fullEntries.length}} 次！
                     </h5>
                     <div class="table-responsive-sm">
-                        <table class="table table-striped">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -82,11 +82,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="row in history">
+                                <tr v-for="row in histories.displayEntries">
                                     <th scope="row">{{row.pid}}</th>
                                     <td>{{row.restaurant}}</td>
                                     <td>{{row.when}}</td>
-                                    <td><a :href="'https://iplocation.com/?ip=' + row.ip" target="_blank" class="text-body text-decoration-none font-monospace">{{row.ip}}</a></td>
+                                    <td class="font-monospace" @click="WatchIP(row.ip)">{{row.ip}}</td>
                                     <td class="font-monospace">{{row.time}}</td>
                                 </tr>
                             </tbody>
@@ -94,12 +94,14 @@
                     </div>
                     <div class="text-end">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary" :disabled="preview_btn == 0" @click="Preview10">前 10 筆</button>
-                            <button type="button" class="btn btn-primary" :disabled="next_btn == 0" @click="Next10">後 10 筆</button>
+                            <button type="button" class="btn btn-primary" :disabled="previewBtn == 0" @click="Preview10">前 10 筆</button>
+                            <button type="button" class="btn btn-primary" :disabled="nextBtn == 0" @click="Next10">後 10 筆</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- restaurant list cards -->
             <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
                 <div class="col">
                     <div class="card h-100">
@@ -109,14 +111,14 @@
                                 有這些早餐！
                             </h5>
                             <ul class="list-group list-group-flush">
-                                <li v-for="res in brunch" class="list-group-item list-group-item-action" @click="EditRestaruant(res)">
+                                <li v-for="res in restaurants.brunch" class="list-group-item list-group-item-action" @click="EditRestaurant(res)">
                                     <span class="restuarant-name">{{res.restaurant}}</span>
-                                    <button type="button" class="btn-close float-end" @click.stop="DeleteRestaruant(res.rid)"></button>
+                                    <button type="button" class="btn-close float-end" :class="darkTheme ? 'btn-close-white' : ''" @click.stop="DeleteRestaurant(res.rid)"></button>
                                 </li>
                                 <li class="list-group-item">
                                     <form @submit.prevent="AddBrunch">
                                         <div class="input-group mb-3">
-                                            <input class="form-control" type="text" placeholder="吃這家早餐啦" aria-label="new brunch" v-model="new_brunch">
+                                            <input class="form-control" type="text" placeholder="吃這家早餐啦" aria-label="new brunch" v-model="newBrunch">
                                             <button type="button" class="btn btn-secondary" @click="AddBrunch"><i class="fas fa-plus"></i></button>
                                         </div>
                                     </form>
@@ -133,14 +135,14 @@
                                 有這些晚餐！
                             </h5>
                             <ul class="list-group list-group-flush">
-                                <li v-for="res in dinner" class="list-group-item list-group-item-action" @click="EditRestaruant(res)">
+                                <li v-for="res in restaurants.dinner" class="list-group-item list-group-item-action" @click="EditRestaurant(res)">
                                     <span class="restuarant-name">{{res.restaurant}}</span>
-                                    <button type="button" class="btn-close float-end" @click="DeleteRestaruant(res.rid)"></button>
+                                    <button type="button" class="btn-close float-end" :class="darkTheme ? 'btn-close-white' : ''" @click.stop="DeleteRestaurant(res.rid)"></button>
                                 </li>
                                 <li class="list-group-item">
                                     <form @submit.prevent="AddDinner">
                                         <div class="input-group mb-3">
-                                            <input class="form-control" type="text" placeholder="吃這家晚餐啦" aria-label="new dinner" v-model="new_dinner">
+                                            <input class="form-control" type="text" placeholder="吃這家晚餐啦" aria-label="new dinner" v-model="newDinner">
                                             <button type="button" class="btn btn-secondary" @click="AddDinner"><i class="fas fa-plus"></i></button>
                                         </div>
                                     </form>
@@ -150,6 +152,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- region list card -->
             <div class="card my-4">
                 <div class="card-body">
                     <h5 class="card-title">
@@ -166,31 +170,50 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="reg in restuarant_list" @click="UpdateRegion(reg)">
-                                    <td>{{reg.title}}</td>
-                                    <td>{{reg.name}}</td>
-                                    <td><button type="button" class="btn-close float-end" @click.stop="DeleteRegion(reg.title)"></button></td>
+                                <tr v-for="reg in regionList">
+                                    <td @click="UpdateRegion(reg)">{{reg.title}}</td>
+                                    <td @click="UpdateRegionID(reg)">{{reg.name}}</td>
+                                    <td><button type="button" class="btn-close float-end" :class="darkTheme ? 'btn-close-white' : ''" @click.stop="DeleteRegion(reg.title)"></button></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="我要這個區域" aria-label="new title" v-model="new_region.title">
-                        <input type="text" class="form-control" placeholder="就叫它這個代號！" aria-label="new name" v-model="new_region.name" pattern="[A-Za-z]">
+                        <input type="text" class="form-control" placeholder="我要這個區域" aria-label="new title" v-model="newRegion.title">
+                        <input type="text" class="form-control" placeholder="就叫它這個代號！" aria-label="new name" v-model="newRegion.name">
                         <button type="button" class="btn btn-secondary" @click="AddRegion"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    <footer class="page-footer mb-4">
-        <div class="footer-copyright text-black-50">
-            <div class="container">
-                <hr>
-                <span>&copy; 2021 LuSkywalker v2.0.0.beta</span>
+
+    <footer class="page-footer mb-4" id="footer">
+        <div class="footer-copyright font-monospace container" :class="darkTheme ? 'text-white-50' : 'text-black-50'">
+            <hr>
+            <div class="row">
+                <div class="col-auto">
+                    <span>&copy; {{copyrightYear}} LuSkywalker v2.0.3</span>
+                </div>
+                <ul class="col-auto list-inline">
+                    <li class="list-inline-item">
+                        <a href="https://github.com/luswdev/eat-what" target="_blank" class="text-decoration-none">參考原始碼</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#!" class="text-decoration-none" @click="FeedBack">意見反饋</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </footer>
-    <script src="scripts/main.js"></script>
+
+    <!-- back to top fixed button -->
+    <button class="btn position-fixed bottom-0 end-0 m-3" :class="darkTheme ? 'btn-secondary' : 'bg-light'" @click="backToTop" id="b2t" v-bind:style="styles">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- application JavaScript -->
+    <script src="scripts/api.js?v=2102171618"></script>
+    <script src="scripts/render.js?v=2102171758"></script>
 </body>
 </html>

@@ -1,36 +1,57 @@
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-color: #212121;
-        --secondary-bg: #616161;
-        --primary-color: #9e9e9e;
-        --secondary-color: rgba(255,255,255,.5);
-        --third-color: #616161;
-        --label-color: rgba(255,255,255,0.6);
-        --placeholder-color: #515151;
-        --header-color: #9e9e9e;
-        --shadow-color: rgba(255,255,255,.175);
-        --table-border-color: rgba(255,255,255,0.12);
+        --bg-color: #1C2024;
+        --list-bg-hover-color: #212529;
+        --list-border-color: rgba(255, 255, 255, .125);
+        --form-border-color: #7F8387;
+        --table-border-color: #313234;
+        --thead-border-color: #313234;
+        --text-color: #fff;
     }
-  
 }
 
 @media (prefers-color-scheme: light) {
     :root {
         --bg-color: #fff;
-        --secondary-bg: #eee;
-        --primary-color: #212121;
-        --secondary-color: rgba(0,0,0,.5);
-        --third-color: #9e9e9e;
-        --label-color: rgba(0,0,0,0.6);
-        --placeholder-color: #d1d1d1;
-        --header-color: #009688;
-        --shadow-color: rgba(0,0,0,.175)
-        --table-border-color: rgba(0,0,0,0.12);
+        --list-bg-hover-color: #f8f9fa;
+        --list-border-color: rgba(0, 0, 0, .125);
+        --form-border-color: #ced4da;
+        --table-border-color: #dee2e6;
+        --text-color: #212529;
     }
 }
 
-@media only screen and (max-width: 992px) {
-    table.responsive-table thead {
-        border-color: var(--table-border-color);
-    }
+body,
+.card,
+.form-select,
+.table,
+.form-control,
+.list-group-item,
+.form-control:focus {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.card,
+.list-group-item {
+    border-color: var(--list-border-color);
+}
+
+.form-control {
+    border-color: var(--form-border-color);
+}
+ 
+.table-hover>tbody>tr:hover {
+    --bs-table-accent-bg: var(--list-bg-hover-color);
+    color: var(--text-color);
+}
+
+.list-group-item-action:focus, 
+.list-group-item-action:hover {
+    background-color: var(--list-bg-hover-color);
+    color: var(--text-color);
+}
+
+.table {
+    border-color: var(--table-border-color);
 }

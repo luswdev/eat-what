@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Open+Sans:wght@400;600;800&family=Roboto+Mono:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;900&family=Open+Sans:wght@400;600;800&family=Roboto+Mono:ital@0;1&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css') (prefers-color-scheme: dark); 
 
-html {
+body {
     font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
 }
 
 header .navbar-brand {
-    font-weight: 800;
+    font-weight: 900;
 }
 
 main {
@@ -48,4 +49,8 @@ li.list-group-item {
 
 .restuarant-name {
     width: 90%;
+}
+
+#b2t {
+    transition: bottom .3s ease;
 }
