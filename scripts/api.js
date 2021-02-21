@@ -2,6 +2,8 @@
  * api.js
  */
 
+'use strict';
+
 class APIs {  
     BuildFormData(data) {
         let bodyFormData = new FormData()

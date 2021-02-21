@@ -27,4 +27,5 @@ if ($mesg) {
     $headers .= 'X-Mailer: PHP/'.phpversion();
     $res = mail($to, $subject, $message, $headers, '-fno-reply@lusw.dev');
 }
+
 ?>

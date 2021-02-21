@@ -1,5 +1,5 @@
 /**
- * main.js
+ * render.js
  */
 
 'use strict';
@@ -51,6 +51,13 @@ let app = new Vue({
     methods: {
         ChangeRegion: function () {
             this.GetRestaurantList()
+
+            for (let i = 0; i < this.regionList.length; ++i) {
+                if (this.selectedRegion == this.regionList[i].name) {
+                    Cookies.set('default-index', i)
+                    break
+                }
+            }
         },
         PickChange: function () {
             header.picked = this.picked.current
@@ -183,18 +190,30 @@ let app = new Vue({
                 inputValidator: (value) => {
                     if (!value) {
                         return '什麼啦！'
-                    } else {
-                        API.post('restaurant', { 
-                            'res': res.rid,
-                            'new': value
-                        }).then((res) => {                    
-                            this.GetRestaurantList()
-                            Toast.fire({
-                                icon: 'success',
-                                title: `成功修改名稱：${value}`
-                            })
-                        })                      
                     }
+                }
+            }).then( (ret) => {
+                if (!ret.isConfirmed) {
+                    return 
+                }
+
+                let value = ret.value
+                if (value != res.restaurant) {
+                    API.post('restaurant', { 
+                        'res': res.rid,
+                        'new': value
+                    }).then((res) => {                    
+                        this.GetRestaurantList()
+                        Toast.fire({
+                            icon: 'success',
+                            title: `成功修改名稱：${value}`
+                        })
+                    })                      
+                } else {
+                    Toast.fire({
+                        icon: 'warning',
+                        title: '啊不是長一樣嗎？'
+                    })
                 }
             })
         },
@@ -241,10 +260,15 @@ let app = new Vue({
                 'id': this.newRegion.name
             }).then( (res) => {
                 this.GetRegionList()
-            })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: `新增區域：${this.newRegion.title}，或者你可以叫他：${this.newRegion.name}！`
+                })
       
-            this.newRegion.title = ''
-            this.newRegion.name = ''
+                this.newRegion.title = ''
+                this.newRegion.name = ''
+            })
         },
         DeleteRegion: function (name) {
             Swal.fire({
@@ -262,13 +286,11 @@ let app = new Vue({
                         'del': name,
                     }).then( (res) => {
                         this.GetRegionList()
+                        Toast.fire({
+                            icon: 'success',
+                            title: '刪除成功！我連刪了什麼都不記得了。'
+                        })
                     })
-    
-                    Swal.fire(
-                        '好喔！',
-                        '成功刪除了...我刪了什麼？',
-                        'success'
-                    )
                 }
             })
         },
@@ -282,14 +304,30 @@ let app = new Vue({
                 inputValidator: (value) => {
                     if (!value) {
                         return '什麼啦！'
-                    } else {
-                        API.post('region', { 
-                            'reg': reg.name,
-                            'new': value
-                        }).then( (res) => {
-                            this.GetRegionList()
+                    } 
+                }
+            }).then( (ret) => {
+                if (!ret.isConfirmed) {
+                    return 
+                }
+
+                let value = ret.value
+                if (value != reg.title) {
+                    API.post('region', { 
+                        'reg': reg.name,
+                        'new': value
+                    }).then( (res) => {
+                        this.GetRegionList()
+                        Toast.fire({
+                            icon: 'success',
+                            title: `已經改成${value}了！`
                         })
-                    }
+                    })
+                } else {
+                    Toast.fire({
+                        icon: 'warning',
+                        title: '啊不是長一樣嗎？'
+                    })
                 }
             })
         },
@@ -327,9 +365,11 @@ let app = new Vue({
         },
         GetRegionList: function () {           
             API.get('region').then( (res) => {
+                let defaultIdx = Cookies.get('default-index')
+
                 let reg = res.data
                 this.regionList = reg
-                this.selectedRegion = this.regionList[0].name
+                this.selectedRegion = this.regionList[defaultIdx].name
                 this.GetRestaurantList()
             })
         },
@@ -338,6 +378,10 @@ let app = new Vue({
         }
     },
     mounted: function () {    
+        if (!Cookies.get('default-index')) {
+            Cookies.set('default-index', 0)
+        }
+
         this.GetRegionList()
         this.GrabHistory()  
 
@@ -374,7 +418,8 @@ let footer = new Vue({
     el: '#footer',
     data: {
         'darkTheme': header.darkTheme,
-        'copyrightYear': 2020
+        'copyrightYear': 0,
+        'versionNumber': ''
     },
     methods: {
         FeedBack: async function () {
@@ -397,6 +442,7 @@ let footer = new Vue({
                 </form>`,
                 focusConfirm: false,
                 preConfirm: () => {
+                    /* feedback message cannot be empty */
                     if (document.getElementById('fb-body').value == '') {
                         document.getElementById('fb-body').classList.add('is-invalid')
                         return false
@@ -429,10 +475,16 @@ let footer = new Vue({
         }
     },
     mounted: function () {
-        let curYear = new Date().getFullYear()
-        if (curYear != this.copyrightYear) {
-            this.copyrightYear = `${this.copyrightYear} ~ ${curYear}`
-        }
+        API.get('web-info').then((ret) => {
+            let json = ret.data
+            this.copyrightYear = json.copyright
+            this.versionNumber = json.version
+
+            let curYear = new Date().getFullYear()
+            if (curYear != parseInt(this.copyrightYear)) {
+                this.copyrightYear = `${this.copyrightYear} ~ ${curYear}`
+            }
+        })        
     }
 })
 
@@ -447,10 +499,10 @@ let b2t = new Vue({
     },
     methods: {
         backToTop: function () {
-            this.scrollToTop(100)
+            this.scrollToTop()
             document.getElementById('b2t').blur()
         },
-        scrollToTop: (duration) => {
+        scrollToTop: function () {
             window.scrollTo({ top: 0, behavior: 'smooth' })
         }
     },

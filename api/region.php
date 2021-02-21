@@ -10,25 +10,33 @@ $del = $_DELETE['del'] ?? false;
 
 include_once('db.php');
 
-if ($regid && $new) {    
-    $query = 'UPDATE region_lists SET name=?, `update-ip`=? WHERE regid=?';
+if ($regid && $new) {        
+    $query = 'SELECT RegionName FROM RegionList WHERE RegionID=?';
+	$stmt  = $conn->prepare($query);
+	$stmt->bind_param('s', $regid);
+    $stmt->execute();
+    $stmt->bind_result($backupName);
+    $stmt->fetch();
+    $stmt->close();
+
+    $query = 'UPDATE RegionList SET RegionName=?, UpdatedFrom=?, BackupName=? WHERE RegionID=?';
 	$stmt = $conn->prepare($query);
-	$stmt->bind_param('sss', $new, $ip, $regid);
+	$stmt->bind_param('ssss', $new, $ip, $backupName, $regid);
     $stmt->execute();
 } else if ($new && $id) {
-    $query = 'INSERT region_lists(regid, `name`, `update-ip`) VALUES (?, ?, ?)';
+    $query = 'INSERT RegionList(RegionID, RegionName, UpdatedFrom) VALUES (?, ?, ?)';
     $stmt = $conn->prepare($query);
 	$stmt->bind_param('sss', $id, $new, $ip);
     $stmt->execute();
     $stmt->close();
 } else if ($del) {
-    $query = 'DELETE FROM region_lists WHERE `name`=?';
+    $query = 'DELETE FROM RegionList WHERE RegionName=?';
 	$stmt = $conn->prepare($query);
 	$stmt->bind_param('s', $del);
 	$stmt->execute();
     $stmt->close();
 } else {
-    $query = 'SELECT regid, `name` FROM region_lists ORDER BY uuid ASC';
+    $query = 'SELECT RegionID, RegionName FROM RegionList ORDER BY UUID ASC';
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $stmt->bind_result($rid, $reg);
@@ -45,4 +53,5 @@ if ($regid && $new) {
 }
 
 $conn->close();
+
 ?>

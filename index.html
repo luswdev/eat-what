@@ -12,6 +12,7 @@
         <script src="//kit.fontawesome.com/7205443a15.js" crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script src="//cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
         <!-- CSS -->
         <link href="//cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -119,7 +120,7 @@
                                     <form @submit.prevent="AddBrunch">
                                         <div class="input-group mb-3">
                                             <input class="form-control" type="text" placeholder="吃這家早餐啦" aria-label="new brunch" v-model="newBrunch">
-                                            <button type="button" class="btn btn-secondary" @click="AddBrunch"><i class="fas fa-plus"></i></button>
+                                            <button type="button" class="btn btn-secondary" :disabled="newBrunch == ''" @click="AddBrunch"><i class="fas fa-plus"></i></button>
                                         </div>
                                     </form>
                                 </li>
@@ -143,7 +144,7 @@
                                     <form @submit.prevent="AddDinner">
                                         <div class="input-group mb-3">
                                             <input class="form-control" type="text" placeholder="吃這家晚餐啦" aria-label="new dinner" v-model="newDinner">
-                                            <button type="button" class="btn btn-secondary" @click="AddDinner"><i class="fas fa-plus"></i></button>
+                                            <button type="button" class="btn btn-secondary" :disabled="newDinner == ''" @click="AddDinner"><i class="fas fa-plus"></i></button>
                                         </div>
                                     </form>
                                 </li>
@@ -181,7 +182,7 @@
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="我要這個區域" aria-label="new title" v-model="newRegion.title">
                         <input type="text" class="form-control" placeholder="就叫它這個代號！" aria-label="new name" v-model="newRegion.name">
-                        <button type="button" class="btn btn-secondary" @click="AddRegion"><i class="fas fa-plus"></i></button>
+                        <button type="button" class="btn btn-secondary" :disabled="newRegion.title == '' | newRegion.name == ''" @click="AddRegion"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>
             </div>
@@ -193,7 +194,7 @@
             <hr>
             <div class="row">
                 <div class="col-auto">
-                    <span>&copy; {{copyrightYear}} LuSkywalker v2.0.3</span>
+                    <span>&copy; {{copyrightYear}} LuSkywalker v{{versionNumber}}</span>
                 </div>
                 <ul class="col-auto list-inline">
                     <li class="list-inline-item">
@@ -214,6 +215,6 @@
 
     <!-- application JavaScript -->
     <script src="scripts/api.js?v=2102171618"></script>
-    <script src="scripts/render.js?v=2102171758"></script>
+    <script src="scripts/render.js?v=2102211901"></script>
 </body>
 </html>

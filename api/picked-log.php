@@ -7,14 +7,14 @@ include_once('db.php');
 
 if ($update) {
     $conn = new mysqli($DBHOST, $DBUSER, $DBPASS, $DBNAME);
-    $query = 'INSERT picked_log(rid, picker_ip) VALUES (?, ?)';
+    $query = 'INSERT PickedLog(RID, PickFrom) VALUES (?, ?)';
     $stmt = $conn->prepare($query);
     $stmt->bind_param('ss', $update, $ip);
     $stmt->execute();
     $LastID = $conn->insert_id;
     $stmt->close();
 } else {
-    $query = 'SELECT a.pid, b.restaurant, b.open_time, a.pick_time, a.picker_ip FROM picked_log AS a LEFT JOIN restaurant_lists AS b ON a.rid = b.rid ORDER BY pid DESC';
+    $query = 'SELECT a.PID, b.Restaurant, b.OpenTime, a.PickTime, a.PickFrom FROM PickedLog AS a LEFT JOIN RestaurantList AS b ON a.RID = b.RID ORDER BY PID DESC';
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $stmt->bind_result($pid, $res, $when, $time, $ip_r);

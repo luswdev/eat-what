@@ -12,23 +12,32 @@ $list = $_GET['list']   ?? $_POST['list'] ?? $_DELETE['list'] ?? 'ndhu';
 include_once('db.php');
 
 if ($resid && $res) {
-    $query = 'UPDATE restaurant_lists SET restaurant=?, `update-ip`=? WHERE rid=?';
+    $query = 'SELECT Restaurant FROM RestaurantList WHERE RID=?';
 	$stmt  = $conn->prepare($query);
-	$stmt->bind_param('sss', $res, $ip, $resid);
+	$stmt->bind_param('s', $resid);
     $stmt->execute();
-} else if ($res && $when) {
-    $query = 'INSERT restaurant_lists(restaurant, open_time, region, `update-ip`) VALUES (?, ?, ?, ?)';
+    $stmt->bind_result($backupName);
+    $stmt->fetch();
+    $stmt->close();
+
+    $query = 'UPDATE RestaurantList SET BackupName=?, Restaurant=?, UpdatedFrom=? WHERE RID=?';
 	$stmt  = $conn->prepare($query);
-	$stmt->bind_param('ssss', $res, $when, $list, $ip);
+	$stmt->bind_param('ssss', $backupName, $res, $ip, $resid);
+    $stmt->execute();
+    $stmt->close();
+} else if ($res && $when) {
+    $query = 'INSERT RestaurantList(restaurant, OpenTime, Region, UpdatedFrom, BackupName) VALUES (?, ?, ?, ?, ?)';
+	$stmt  = $conn->prepare($query);
+	$stmt->bind_param('sssss', $res, $when, $list, $ip, $res);
     $stmt->execute();
 } else if ($del) {
-    $query = 'DELETE FROM restaurant_lists WHERE rid=?';
+    $query = 'DELETE FROM RestaurantList WHERE rid=?';
 	$stmt  = $conn->prepare($query);
 	$stmt->bind_param('s', $del);
 	$stmt->execute();
     $stmt->close();
 } else {
-    $query = 'SELECT rid, restaurant FROM restaurant_lists WHERE open_time=\'brunch\' AND region=?';
+    $query = 'SELECT RID, Restaurant FROM RestaurantList WHERE OpenTime=\'brunch\' AND Region=?';
     $stmt  = $conn->prepare($query);
 	$stmt->bind_param('s', $list);
     $stmt->execute();
@@ -41,7 +50,7 @@ if ($resid && $res) {
     }
     $stmt->close();
 
-    $query = 'SELECT rid, restaurant FROM restaurant_lists WHERE open_time=\'dinner\' AND region=?';
+    $query = 'SELECT RID, Restaurant FROM RestaurantList WHERE OpenTime=\'dinner\' AND Region=?';
     $stmt  = $conn->prepare($query);
 	$stmt->bind_param('s', $list);
     $stmt->execute();
@@ -64,4 +73,5 @@ if ($resid && $res) {
 }
 
 $conn->close();
+
 ?>
