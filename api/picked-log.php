@@ -38,4 +38,5 @@ if ($update) {
 }
 
 $conn->close();
+
 ?>

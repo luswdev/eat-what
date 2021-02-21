@@ -7,15 +7,15 @@
         <link rel="icon" type="image/png" href="images/favicon.png">
 
         <!-- JavaScript -->
-        <script src="//cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-        <script src="//cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"></script>
-        <script src="//kit.fontawesome.com/7205443a15.js" crossorigin="anonymous"></script>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-        <script src="//cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+        <script src="scripts/libs/bootstrap.bundle.min.js"></script>
+        <script src="scripts/libs/vue.min.js"></script>
+        <script src="scripts/libs/7205443a15.js" crossorigin="anonymous"></script>
+        <script src="scripts/libs/sweetalert2.all.min.js"></script>
+        <script src="scripts/libs/axios.min.js"></script>
+        <script src="scripts/libs/js.cookie.min.js"></script>
 
         <!-- CSS -->
-        <link href="//cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link href="styles/libs/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="styles/main.css?v=2102171618" rel="stylesheet" type="text/css">
         <link href="styles/helper.css?v=2102140239" rel="stylesheet" type="text/css">
 	</head>
@@ -198,7 +198,7 @@
                 </div>
                 <ul class="col-auto list-inline">
                     <li class="list-inline-item">
-                        <a href="https://github.com/luswdev/eat-what" target="_blank" class="text-decoration-none">參考原始碼</a>
+                        <a href="//github.com/luswdev/eat-what" target="_blank" class="text-decoration-none">參考原始碼</a>
                     </li>
                     <li class="list-inline-item">
                         <a href="#!" class="text-decoration-none" @click="FeedBack">意見反饋</a>
@@ -214,7 +214,11 @@
     </button>
 
     <!-- application JavaScript -->
-    <script src="scripts/api.js?v=2102171618"></script>
-    <script src="scripts/render.js?v=2102211901"></script>
+    <script src="scripts/helper/api.js?v=2102171618"></script>
+    <script src="scripts/helper/toast.js?v=2102211953"></script>
+    <script src="scripts/views/app.js?v=2102211953"></script>
+    <script src="scripts/views/header.js?v=2102211953"></script>
+    <script src="scripts/views/footer.js?v=2102211953"></script>
+    <script src="scripts/views/b2t.js?v=2102211953"></script>
 </body>
 </html>
