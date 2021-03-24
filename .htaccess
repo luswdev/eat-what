@@ -3,6 +3,7 @@ Redirect 403 /eat/data/
 
 RewriteEngine On
 RewriteBase /eat
+RewriteRule ^region/([\w]+)$ index.html?region=$1 [NC,L]
 RewriteRule ^api/picked-log$ api/picked-log.php [NC,L]
 RewriteRule ^api/picked-log/([0-9]+)$ api/picked-log.php?pid=$1 [NC,L]
 RewriteRule ^api/restaurant$ api/restaurant.php [NC,L]
@@ -10,3 +11,6 @@ RewriteRule ^api/restaurant/([\w]+)$ api/restaurant.php?list=$1 [NC,L]
 RewriteRule ^api/region$ api/region.php [NC,L]
 RewriteRule ^api/post-mail$ api/post-mail.php [NC,L]
 RewriteRule ^api/web-info$ api/web-info.php [NC,L]
+RewriteRule ^api/rank$ api/rank.php [NC,L]
+RewriteRule ^api/rank/restaurant$ api/rank.php?type=restaurant [NC,L]
+RewriteRule ^api/rank/country$ api/rank.php?type=country [NC,L]

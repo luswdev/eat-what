@@ -7,6 +7,7 @@
         --table-border-color: #313234;
         --thead-border-color: #313234;
         --text-color: #fff;
+        --text-first: #fac858;
     }
 }
 
@@ -18,7 +19,29 @@
         --form-border-color: #ced4da;
         --table-border-color: #dee2e6;
         --text-color: #212529;
+        --text-first: #E5B751;
     }
+}
+
+body.dark {
+    --bg-color: #1C2024;
+    --list-bg-hover-color: #212529;
+    --list-border-color: rgba(255, 255, 255, .125);
+    --form-border-color: #7F8387;
+    --table-border-color: #313234;
+    --thead-border-color: #313234;
+    --text-color: #fff;
+    --text-first: #fac858;
+}
+
+body.light {
+    --bg-color: #fff;
+    --list-bg-hover-color: #f8f9fa;
+    --list-border-color: rgba(0, 0, 0, .125);
+    --form-border-color: #ced4da;
+    --table-border-color: #dee2e6;
+    --text-color: #212529;
+    --text-first: #E5B751;
 }
 
 body,

@@ -1,224 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 	<head>
-        <title>吃什麼</title>
+        <title>吃什麼 | LuSkywalker</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no" />
         <link rel="icon" type="image/png" href="images/favicon.png">
 
         <!-- JavaScript -->
-        <script src="scripts/libs/bootstrap.bundle.min.js"></script>
-        <script src="scripts/libs/vue.min.js"></script>
-        <script src="scripts/libs/7205443a15.js" crossorigin="anonymous"></script>
-        <script src="scripts/libs/sweetalert2.all.min.js"></script>
-        <script src="scripts/libs/axios.min.js"></script>
-        <script src="scripts/libs/js.cookie.min.js"></script>
+        <script src="/cdn/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="/cdn/vuejs/vue.min.js"></script>
+        <script src="/cdn/vuejs/httpVueLoader.js"></script>
+        <script src="/cdn/font-awesome/font-awesome5.js" crossorigin="anonymous"></script>
+        <script src="/cdn/sweetalert2/sweetalert2.all.min.js"></script>
+        <script src="/cdn/axios/axios.min.js"></script>
+        <script src="/cdn/js-cookie/js.cookie.min.js"></script>
+        <script src="/cdn/echarts/echarts.min.js"></script>
 
         <!-- CSS -->
-        <link href="styles/libs/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="styles/main.css?v=2102171618" rel="stylesheet" type="text/css">
-        <link href="styles/helper.css?v=2102140239" rel="stylesheet" type="text/css">
+        <link href="/cdn/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="/cdn/sweetalert2/dark.css?v=2102242345" rel="stylesheet" type="text/css">
+        <link href="/eat/styles/main.css?v=2103212325" rel="stylesheet" type="text/css">
+        <link href="/eat/styles/helper.css?v=2103212325" rel="stylesheet" type="text/css">
 	</head>
 <body class="min-vh-100 d-flex flex-column">
     <header id="vue-header">
-        <nav class="navbar navbar-expand py-3" :class="darkTheme ? 'bg-dark navbar-dark' : 'bg-light navbar-light'">
-            <div class="container">
-                <span class="navbar-brand mb-0 h1 mr-0 mr-md-2">
-                    <i v-if="picked=='brunch'" class="fas fa-bread-slice"></i>
-                    <i v-else class="fas fa-hamburger"></i>
-                    吃什麼
-                </span>
-            </div>
-        </nav>
+        <nav-bar title="吃什麼" :theme="darkTheme" :picked="picked" v-model="darkTheme"></nav-bar>
     </header>
 
     <main class="container" id="app">
         <div class="main-inner">
 
             <!-- picker option card -->
-            <div class="card my-4">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="fas fa-utensils"></i>
-                        我想吃...
-                    </h5>
-                    <div class="row g-2">
-                        <div class="form-floating col-md-8">
-                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example" v-model="selectedRegion" @change="ChangeRegion">
-                                <option v-for="list in regionList" :value="list.name">{{list.title}}</option>
-                            </select>
-                            <label for="floatingSelect">選擇區域</label>
-                        </div>
-                        <div class="col-md-4 text-end">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="brunch" v-model="picked.current" v-bind:value="picked.brunch" @change="PickChange" checked>
-                                <label class="form-check-label" for="inlineRadio1">吃早餐</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="dinner" v-model="picked.current" v-bind:value="picked.dinner" @change="PickChange">
-                                <label class="form-check-label" for="inlineRadio2">吃晚餐</label>
-                            </div>     
-                            <button class="btn mr-1 btn-primary" @click="ShowResult" :disabled="started == 0">幫我想！</button>
-                        </div>        
-                    </div>                    
-                </div>
-            </div>
+            <picker :regions="regionList" :current="selectedRegion" :restaurants="restaurants" :started="started" v-model="selectedRegion"></picker>
 
             <!-- history card -->
-            <div class="card my-4">
-                <div class="card-body">                    
-                    <h5 class="card-title">
-                        <i class="fas fa-clock"></i> 
-                        我決定了 {{histories.fullEntries.length}} 次！
-                    </h5>
-                    <div class="table-responsive-sm">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">吃什麼</th>
-                                    <th scope="col">吃哪餐</th>
-                                    <th scope="col">誰按的</th>
-                                    <th scope="col">幾點</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="row in histories.displayEntries">
-                                    <th scope="row">{{row.pid}}</th>
-                                    <td>{{row.restaurant}}</td>
-                                    <td>{{row.when}}</td>
-                                    <td class="font-monospace" @click="WatchIP(row.ip)">{{row.ip}}</td>
-                                    <td class="font-monospace">{{row.time}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="text-end">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary" :disabled="previewBtn == 0" @click="Preview10">前 10 筆</button>
-                            <button type="button" class="btn btn-primary" :disabled="nextBtn == 0" @click="Next10">後 10 筆</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <history :histories="fullEntries"></history>
 
             <!-- restaurant list cards -->
             <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
                 <div class="col">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <i class="fas fa-bread-slice"></i>
-                                有這些早餐！
-                            </h5>
-                            <ul class="list-group list-group-flush">
-                                <li v-for="res in restaurants.brunch" class="list-group-item list-group-item-action" @click="EditRestaurant(res)">
-                                    <span class="restuarant-name">{{res.restaurant}}</span>
-                                    <button type="button" class="btn-close float-end" :class="darkTheme ? 'btn-close-white' : ''" @click.stop="DeleteRestaurant(res.rid)"></button>
-                                </li>
-                                <li class="list-group-item">
-                                    <form @submit.prevent="AddBrunch">
-                                        <div class="input-group mb-3">
-                                            <input class="form-control" type="text" placeholder="吃這家早餐啦" aria-label="new brunch" v-model="newBrunch">
-                                            <button type="button" class="btn btn-secondary" :disabled="newBrunch == ''" @click="AddBrunch"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </form>
-                                </li>
-                            </ul>                  
-                        </div>
-                    </div>
+                    <restaurant-list :theme="darkTheme" type="brunch" :restaurants="restaurants.brunch" :region="selectedRegion"></restaurant-list>
                 </div>                
                 <div class="col">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <i class="fas fa-hamburger"></i>
-                                有這些晚餐！
-                            </h5>
-                            <ul class="list-group list-group-flush">
-                                <li v-for="res in restaurants.dinner" class="list-group-item list-group-item-action" @click="EditRestaurant(res)">
-                                    <span class="restuarant-name">{{res.restaurant}}</span>
-                                    <button type="button" class="btn-close float-end" :class="darkTheme ? 'btn-close-white' : ''" @click.stop="DeleteRestaurant(res.rid)"></button>
-                                </li>
-                                <li class="list-group-item">
-                                    <form @submit.prevent="AddDinner">
-                                        <div class="input-group mb-3">
-                                            <input class="form-control" type="text" placeholder="吃這家晚餐啦" aria-label="new dinner" v-model="newDinner">
-                                            <button type="button" class="btn btn-secondary" :disabled="newDinner == ''" @click="AddDinner"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <restaurant-list :theme="darkTheme" type="dinner" :restaurants="restaurants.dinner" :region="selectedRegion"></restaurant-list>                    
                 </div>
             </div>
 
             <!-- region list card -->
-            <div class="card my-4">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="fas fa-map-marked-alt"></i>
-                        有這些區域！
-                    </h5>
-                    <div class="table-responsive-sm">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">區域名</th>
-                                    <th scope="col">代號</th>                                    
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="reg in regionList">
-                                    <td @click="UpdateRegion(reg)">{{reg.title}}</td>
-                                    <td @click="UpdateRegionID(reg)">{{reg.name}}</td>
-                                    <td><button type="button" class="btn-close float-end" :class="darkTheme ? 'btn-close-white' : ''" @click.stop="DeleteRegion(reg.title)"></button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="我要這個區域" aria-label="new title" v-model="newRegion.title">
-                        <input type="text" class="form-control" placeholder="就叫它這個代號！" aria-label="new name" v-model="newRegion.name">
-                        <button type="button" class="btn btn-secondary" :disabled="newRegion.title == '' | newRegion.name == ''" @click="AddRegion"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
+            <region-list :theme="darkTheme" :regions="regionList"></region-list>
+
+            <!-- rank cards -->
+            <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+                <div class="col">
+                    <restaurant-rank type="brunch" :ranked="ranked.brunchRank" :entries="fullEntries"></restaurant-rank>
+                </div>                
+                <div class="col">
+                    <restaurant-rank type="dinner" :ranked="ranked.dinnerRank" :entries="fullEntries"></restaurant-rank>
+                </div>     
+                <div class="col">    
+                    <visitor-rank :theme="darkTheme" :ranked="ranked.countryRank"></visitor-rank>
+                </div>         
+                <div class="col">  
+                    <picked-time-rank :theme="darkTheme" :ranked="fullEntries"></picked-time-rank>  
+                </div>     
             </div>
         </div>
     </main>
 
-    <footer class="page-footer mb-4" id="footer">
-        <div class="footer-copyright font-monospace container" :class="darkTheme ? 'text-white-50' : 'text-black-50'">
-            <hr>
-            <div class="row">
-                <div class="col-auto">
-                    <span>&copy; {{copyrightYear}} LuSkywalker v{{versionNumber}}</span>
-                </div>
-                <ul class="col-auto list-inline">
-                    <li class="list-inline-item">
-                        <a href="//github.com/luswdev/eat-what" target="_blank" class="text-decoration-none">參考原始碼</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#!" class="text-decoration-none" @click="FeedBack">意見反饋</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <footer class="page-footer" id="footer">
+        <copyright :theme="darkTheme" :year="copyrightYear" :version="versionNumber"></copyright>
+        <b2t :theme="darkTheme"></b2t>
     </footer>
 
-    <!-- back to top fixed button -->
-    <button class="btn position-fixed bottom-0 end-0 m-3" :class="darkTheme ? 'btn-secondary' : 'bg-light'" @click="backToTop" id="b2t" v-bind:style="styles">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
     <!-- application JavaScript -->
-    <script src="scripts/helper/api.js?v=2102171618"></script>
-    <script src="scripts/helper/toast.js?v=2102211953"></script>
-    <script src="scripts/views/app.js?v=2102211953"></script>
-    <script src="scripts/views/header.js?v=2102211953"></script>
-    <script src="scripts/views/footer.js?v=2102211953"></script>
-    <script src="scripts/views/b2t.js?v=2102211953"></script>
+    <script src="/eat/scripts/helper/api.js?v=2102171618"></script>
+    <script src="/eat/scripts/helper/toast.js?v=2102211953"></script>
+    <script src="/eat/scripts/views/app.js?v=2103240258"></script>
+    <script src="/eat/scripts/views/footer.js?v=2140237237"></script>
+    <script src="/eat/scripts/views/header.js?v=2103240237"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: text/plain; charset=utf-8');
+
 $config = json_decode(file_get_contents('../data/config.json'));
 $DBHOST = $config->db->host;
 $DBUSER = $config->db->user;
