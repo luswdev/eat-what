@@ -18,8 +18,8 @@
 
         <!-- CSS -->
         <link href="/cdn/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="/cdn/sweetalert2/dark.css?v=2102242345" rel="stylesheet" type="text/css">
-        <link href="/eat/styles/main.css?v=2103212325" rel="stylesheet" type="text/css">
+        <link href="/cdn/sweetalert2/dark.css?v=2102242355" rel="stylesheet" type="text/css">
+        <link href="/eat/styles/main.css?v=2103250149" rel="stylesheet" type="text/css">
         <link href="/eat/styles/helper.css?v=2103212325" rel="stylesheet" type="text/css">
 	</head>
 <body class="min-vh-100 d-flex flex-column">
@@ -29,6 +29,7 @@
 
     <main class="container" id="app">
         <div class="main-inner">
+            <cookies-accept v-if="needAccept === true" v-model="needAccept"></cookies-accept>
 
             <!-- picker option card -->
             <picker :regions="regionList" :current="selectedRegion" :restaurants="restaurants" :started="started" v-model="selectedRegion"></picker>
@@ -75,7 +76,7 @@
     <!-- application JavaScript -->
     <script src="/eat/scripts/helper/api.js?v=2102171618"></script>
     <script src="/eat/scripts/helper/toast.js?v=2102211953"></script>
-    <script src="/eat/scripts/views/app.js?v=2103240258"></script>
+    <script src="/eat/scripts/views/app.js?v=2103250124"></script>
     <script src="/eat/scripts/views/footer.js?v=2140237237"></script>
     <script src="/eat/scripts/views/header.js?v=2103240237"></script>
 </body>

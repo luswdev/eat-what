@@ -22,8 +22,10 @@ let app = new Vue({
         },
         'darkTheme': true,
         'started': false,
+        'needAccept': false
     },
     components: {
+        'cookies-accept': httpVueLoader('/eat/components/cookies-accept.vue'),
         'picker': httpVueLoader('/eat/components/picker-card.vue'),
         'history': httpVueLoader('/eat/components/history-card.vue'),
         'restaurant-list': httpVueLoader('/eat/components/restaurant-list-card.vue'),
@@ -70,9 +72,11 @@ let app = new Vue({
                     if (!validRegion) {
                         document.location.href = '/eat'
                     }
-                } else {
+                } else if (Window.acceptCookies) {
                     let defaultIdx = Cookies.get('default-index')                   
                     this.selectedRegion = this.regionList[defaultIdx].name
+                } else {
+                    this.selectedRegion = this.regionList[0].name
                 }
 
                 this.GetRestaurantList()
@@ -86,7 +90,13 @@ let app = new Vue({
             })
         }
     },
-    mounted: function () {   
+    mounted: function () {
+        Window.acceptCookies = true
+        if (!Cookies.get('accept-cookies')) {
+            this.needAccept = true
+            Window.acceptCookies = false
+        } 
+
         this.GrabHistory()
         this.GetRankList('restaurant')
 

@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;900&family=Open+Sans:wght@400;600;800&family=Roboto+Mono:ital@0;1&display=swap');
 
 body {
-    font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
+    font-family: 'Open Sans', 'Noto Sans TC', sans-serif;    
+}
+
+* {
+    touch-action: manipulation;
 }
 
 header .navbar-brand {
@@ -56,4 +60,10 @@ li.list-group-item {
 
 .first-rank {
     color: var(--text-first);
+}
+
+#accept-card {
+    z-index: 1080;
+    opacity: 0.8;
+    width: calc(100% - 2rem);
 }

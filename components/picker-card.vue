@@ -49,17 +49,6 @@ module.exports = {
         }
     }, 
     methods: {
-        ChangeRegion: function () {
-            this.$emit('input', this.selecting)
-            this.$parent.GetRestaurantList()
-
-            for (let i = 0; i < this.regions.length; ++i) {
-                if (this.selecting == this.regions[i].name) {
-                    Cookies.set('default-index', i)
-                    break
-                }
-            }
-        },
         ShowResult: function () {
             this.openCnt++
             if (this.openCnt > 10) {
@@ -138,17 +127,21 @@ module.exports = {
             this.$emit('input', newVal)
             this.$parent.GetRestaurantList()
 
-            for (let i = 0; i < this.regions.length; ++i) {
-                if (this.selecting == this.regions[i].name) {
-                    Cookies.set('default-index', i)
-                    break
+            if (Window.acceptCookies) {  
+                for (let i = 0; i < this.regions.length; ++i) {
+                    if (this.selecting == this.regions[i].name) {
+                        Cookies.set('default-index', i)
+                        break
+                    }
                 }
             }
         }
     },
-    mounted: function() {        
-        if (!Cookies.get('default-index')) {
-            Cookies.set('default-index', 0)
+    mounted: function() {      
+        if (Window.acceptCookies) {  
+            if (!Cookies.get('default-index')) {
+                Cookies.set('default-index', 0)
+            }
         }
 
         let defaultRegion = ''

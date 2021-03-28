@@ -6,14 +6,15 @@
 - 紀錄想到的餐廳啦
 
 ## How to Use
-- Clone
-```bash
-git clone https://github.com/luswdev/eat-what.git
-```
-
-- Then setup apache/nginx yourself.
+Goto [Eat What]("https://lusw.dev/eat") website.
 
 ## Change Log
+- v2.2.1
+    - 新增讓使用者選擇要不要使用 cookies 的按鈕
+- v2.2.0
+    - 程式碼重構
+- v2.1.0
+    - 新增 4 個統計圖表
 - v2.0.0
     - 全新介面啦
     - 新增區域設定

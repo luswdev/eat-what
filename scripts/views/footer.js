@@ -9,7 +9,7 @@ let footer = new Vue({
     data: {
         'darkTheme': true,
         'copyrightYear': 0,
-        'versionNumber': ''
+        'versionNumber': '',
     },
     components: {
         'copyright': httpVueLoader('/eat/components/copyright.vue'),
@@ -25,6 +25,6 @@ let footer = new Vue({
             if (curYear != parseInt(this.copyrightYear)) {
                 this.copyrightYear = `${this.copyrightYear} ~ ${curYear}`
             }
-        })        
+        })  
     }
 })
