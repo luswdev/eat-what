@@ -6,7 +6,7 @@
 - 紀錄想到的餐廳啦
 
 ## How to Use
-Goto [Eat What]("https://lusw.dev/eat") website.
+Goto [Eat What](https://lusw.dev/eat) website.
 
 ## Change Log
 - v2.2.1
