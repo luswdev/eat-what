@@ -1,5 +1,6 @@
-<script src="/cdn/vuejs/vue.min.js"></script>
-<script src="/cdn/vuejs/httpVueLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"
+    integrity="sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 
 <template>
     <button title="Back to top" class="btn position-fixed bottom-0 end-0 m-3" :class="[darkTheme ? 'btn-secondary' : 'bg-light']" @click="backToTop" id="b2t" :style="styles">
@@ -35,9 +36,8 @@ module.exports = {
     mounted: function () {
         window.addEventListener('scroll', () => {
             this.isTop = !(document.documentElement.scrollTop > 0);
-            this.styles.bottom = this.isTop ? '-60px !important' : '0' 
+            this.styles.bottom = this.isTop ? '-60px !important' : '0'
         })
     }
 }
 </script>
-    

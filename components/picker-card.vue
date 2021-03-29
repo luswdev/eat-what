@@ -1,8 +1,9 @@
-<script src="/cdn/vuejs/vue.min.js"></script>
-<script src="/cdn/vuejs/httpVueLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"
+    integrity="sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 
 <template>
-    <div class="card my-4">
+    <div class="card my-4" :data-aos="aostype">
         <div class="card-body">
             <h5 class="card-title">
                 <i class="fas fa-utensils"></i>
@@ -25,17 +26,17 @@
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" v-model="picked.current" :value="picked.dinner">
                         <label class="form-check-label" for="inlineRadio2">吃晚餐</label>
-                    </div>     
+                    </div>
                     <button class="btn mr-1 btn-primary" @click="ShowResult" :disabled="started == 0">幫我想！</button>
-                </div>        
-            </div>                    
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 module.exports = {
-    props: ['regions', 'current', 'started', 'restaurants'],
+    props: ['regions', 'current', 'started', 'restaurants', 'aostype'],
     data() {
         return {
             restaurantResult: '-',
@@ -54,11 +55,11 @@ module.exports = {
             if (this.openCnt > 10) {
                 this.openCnt = 0
                 Swal.fire({
-                    title:              '那就吃...',
-                    text:               '自己想啦幹',
-                    icon:               'error',
+                    title: '那就吃...',
+                    text: '自己想啦幹',
+                    icon: 'error',
                     confirmButtonColor: '#d33',
-                    confirmButtonText:  '幹勒'
+                    confirmButtonText: '幹勒'
                 })
                 return;
             }
@@ -71,38 +72,38 @@ module.exports = {
 
             if (!pool || !pool.length) {
                 Swal.fire({
-                    title:              '那就吃...',
-                    text:               '我也不知道要吃什麼，呵呵',
-                    icon:               'warning',
+                    title: '那就吃...',
+                    text: '我也不知道要吃什麼，呵呵',
+                    icon: 'warning',
                     confirmButtonColor: '#d33',
-                    confirmButtonText:  '幹勒'
-                })   
+                    confirmButtonText: '幹勒'
+                })
                 return;
-            }    
+            }
 
             this.Shuffle(pool, 5);
             var poolIdx = this.RandomRange(pool.length)
-            this.restaurantResult = pool[poolIdx].restaurant    
+            this.restaurantResult = pool[poolIdx].restaurant
             Swal.fire({
-                title:              '那就吃...',
-                html:               `<b class="result-name">${this.restaurantResult}</b>，你說好不好？`,
-                showCancelButton:   true,
+                title: '那就吃...',
+                html: `<b class="result-name">${this.restaurantResult}</b>，你說好不好？`,
+                showCancelButton: true,
                 confirmButtonColor: '#d33',
-                cancelButtonColor:  '#3085d6',
-                confirmButtonText:  '蛤？',
-                cancelButtonText:   '好！'
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: '蛤？',
+                cancelButtonText: '好！'
             }).then((result) => {
                 API.post('picked-log', {
                     'rid': pool[poolIdx].rid,
                     'list': this.cur,
                 }).then( (res) => {
-                    this.$parent.GrabHistory() 
+                    this.$parent.GrabHistory()
                 })
 
                 if (result.isConfirmed) {
                     this.ShowResult()
                 }
-            })           
+            })
         },
         Shuffle: function (array, cnt) {
             while (cnt--) {
@@ -123,7 +124,7 @@ module.exports = {
         'picked.current': function(newVal) {
             header.picked = newVal
         },
-        selecting(newVal) {            
+        selecting(newVal) {
             this.$emit('input', newVal)
             this.$parent.GetRestaurantList()
 
@@ -137,8 +138,8 @@ module.exports = {
             }
         }
     },
-    mounted: function() {      
-        if (Window.acceptCookies) {  
+    mounted: function() {
+        if (Window.acceptCookies) {
             if (!Cookies.get('default-index')) {
                 Cookies.set('default-index', 0)
             }
@@ -146,8 +147,8 @@ module.exports = {
 
         let defaultRegion = ''
         if (document.location.href.length >= 5 && document.location.href.split('/')[4] === 'region') {
-            defaultRegion = document.location.href.split('/')[5]         
-        }        
+            defaultRegion = document.location.href.split('/')[5]
+        }
         
         this.$parent.GetRegionList(defaultRegion)
 
@@ -165,4 +166,3 @@ module.exports = {
     }
 }
 </script>
-    

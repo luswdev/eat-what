@@ -1,8 +1,9 @@
-<script src="/cdn/vuejs/vue.min.js"></script>
-<script src="/cdn/vuejs/httpVueLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"
+    integrity="sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 
 <template>
-    <div class="card">
+    <div class="card" :data-aos="aostype">
         <div class="card-body flex-grow-0">
             <h5 class="card-title">
                 <i class="fas fa-question-circle"></i>
@@ -15,23 +16,13 @@
 
 <script>
 module.exports = {
-    props: ['theme', 'ranked'],
+    props: ['theme', 'ranked', 'aostype'],
     data() {
         return {
             chartDom: undefined,
             chart: undefined,
             option:  {
-                color: [
-                    '#5470c6',
-                    '#fac858',
-                    '#91cc75',
-                    '#ee6666',
-                    '#73c0de',
-                    '#3ba272',
-                    '#fc8452',
-                    '#9a60b4',
-                    '#ea7ccc'
-                ],
+                color: [ '#5470c6', '#fac858', '#91cc75', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc' ],
                 darkMode: this.theme,
                 textStyle: {
                     fontFamily: 'Noto Sans TC',
@@ -39,8 +30,8 @@ module.exports = {
                 },
                 tooltip: {
                     trigger: 'axis',
-                    axisPointer: {            // Use axis to trigger tooltip
-                        type: 'shadow'        // 'shadow' as default; can also be 'line' or 'shadow'
+                    axisPointer: {
+                        type: 'shadow'
                     }
                 },
                 legend: {
@@ -108,8 +99,8 @@ module.exports = {
             this.chart.setOption(this.option)
         },
         ranked(newData) {    
-            this.option.series[0].data[0] = newData.filter(x=>x.when=='早餐').length      
-            this.option.series[1].data[0] = newData.filter(x=>x.when=='晚餐').length      
+            this.option.series[0].data[0] = newData.filter(x=>x.when=='早餐').length
+            this.option.series[1].data[0] = newData.filter(x=>x.when=='晚餐').length
             this.chart.setOption(this.option)
         }
     },
@@ -120,4 +111,3 @@ module.exports = {
     }
 }
 </script>
-    

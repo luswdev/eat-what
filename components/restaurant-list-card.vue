@@ -1,8 +1,9 @@
-<script src="/cdn/vuejs/vue.min.js"></script>
-<script src="/cdn/vuejs/httpVueLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"
+    integrity="sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 
 <template>
-    <div class="card h-100">
+    <div class="card h-100" :data-aos="aostype">
         <div class="card-body flex-grow-0">
             <h5 class="card-title">
                 <i class="fas fa-bread-slice"></i>
@@ -28,29 +29,29 @@
 
 <script>
 module.exports = {
-    props: ['type', 'restaurants', 'theme', 'region'],
+    props: ['type', 'restaurants', 'theme', 'region', 'aostype'],
     data() {
         return {
             darkTheme: true,
             newRestaurant: ''
         }
-    }, 
+    },
     methods: {
         AddRestaruant: function () {
-            API.post('restaurant', { 
-                'new': this.newRestaurant,
+            API.post('restaurant', {
+                'new':  this.newRestaurant,
                 'list': this.region,
                 'when': this.type
-            }).then((res) => {                    
+            }).then((res) => {
                 this.$parent.GetRestaurantList()
                 Toast.fire({
                     icon: 'success',
-                    title: `我知道有${this.newRestaurant}可以吃喔！`
+                    title: `我知道有「${this.newRestaurant}」可以吃喔！`
                 })
                 this.newRestaurant = ''
             }).catch( (err) => {
                 Toast.fire({
-                    icon: 'error',
+                    icon:  'error',
                     title: '你確定？'
                 })
             })
@@ -69,10 +70,10 @@ module.exports = {
         },
         EditRestaurant: function (res) {
             Swal.fire({
-                title:            res.restaurant,
-                input:            'text',
-                inputLabel:       `重新命名 "${res.restaurant}"`,
-                inputValue:       res.restaurant,
+                title: res.restaurant,
+                input: 'text',
+                inputLabel: `重新命名 "${res.restaurant}"`,
+                inputValue: res.restaurant,
                 showCancelButton: true,
                 inputValidator: (value) => {
                     if (!value) {
@@ -86,16 +87,16 @@ module.exports = {
 
                 let value = ret.value
                 if (value != res.restaurant) {
-                    API.post('restaurant', { 
+                    API.post('restaurant', {
                         'res': res.rid,
                         'new': value
-                    }).then((res) => {              
+                    }).then((res) => {
                         this.$parent.GetRestaurantList()
                         Toast.fire({
                             icon: 'success',
                             title: `成功修改名稱：${value}`
                         })
-                    })                      
+                    })
                 } else {
                     Toast.fire({
                         icon: 'warning',
@@ -115,4 +116,3 @@ module.exports = {
     }
 }
 </script>
-    

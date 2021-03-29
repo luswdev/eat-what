@@ -22,7 +22,12 @@ let app = new Vue({
         },
         'darkTheme': true,
         'started': false,
-        'needAccept': false
+        'needAccept': false,
+        'aos': {
+            'up': '',
+            'left': '',
+            'right': ''
+        }
     },
     components: {
         'cookies-accept': httpVueLoader('/eat/components/cookies-accept.vue'),
@@ -45,7 +50,7 @@ let app = new Vue({
                 })
             })
         },  
-        GetRestaurantList: function () {  
+        GetRestaurantList: function () {
             this.started = false
 
             API.get(`restaurant/${this.selectedRegion}`).then((res) => {
@@ -55,7 +60,7 @@ let app = new Vue({
                 this.started = true
             })
         },
-        GetRegionList: function (defaultRegion = '') {           
+        GetRegionList: function (defaultRegion = '') {
             API.get('region').then( (res) => {
                 let reg = res.data
                 this.regionList = reg
@@ -68,12 +73,12 @@ let app = new Vue({
                             this.selectedRegion = defaultRegion
                         }
                     })
-        
+
                     if (!validRegion) {
                         document.location.href = '/eat'
                     }
                 } else if (Window.acceptCookies) {
-                    let defaultIdx = Cookies.get('default-index')                   
+                    let defaultIdx = Cookies.get('default-index')
                     this.selectedRegion = this.regionList[defaultIdx].name
                 } else {
                     this.selectedRegion = this.regionList[0].name
@@ -90,6 +95,17 @@ let app = new Vue({
             })
         }
     },
+    beforeMount: function () {
+        if (window.innerWidth >= 768) {
+            this.aos.up = 'fade-up'
+            this.aos.left = 'fade-left'
+            this.aos.right = 'fade-right'
+        } else {
+            this.aos.up = 'fade-up'
+            this.aos.left = 'fade-up'
+            this.aos.right = 'fade-up'
+        }
+    },
     mounted: function () {
         Window.acceptCookies = true
         if (!Cookies.get('accept-cookies')) {
@@ -104,5 +120,13 @@ let app = new Vue({
         setInterval(() => {
             this.GrabHistory()
         }, 600000);
+    },
+    updated: function () {
+        
+        AOS.init({
+            easing: 'ease-in-out-sine',
+            duration: 700
+        })
+
     }
 })

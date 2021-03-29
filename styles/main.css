@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;900&family=Open+Sans:wght@400;600;800&family=Roboto+Mono:ital@0;1&display=swap');
 
 body {
-    font-family: 'Open Sans', 'Noto Sans TC', sans-serif;    
+    font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
 }
 
 * {
@@ -31,6 +31,7 @@ tr:hover .btn-close {
 
 tbody, td, tfoot, th, thead, tr {
     word-break: keep-all;
+    white-space: nowrap;
 }
 
 .result-name {

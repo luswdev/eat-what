@@ -1,5 +1,6 @@
-<script src="/cdn/vuejs/vue.min.js"></script>
-<script src="/cdn/vuejs/httpVueLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"
+    integrity="sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 
 <template>
     <nav class="navbar navbar-expand py-3" :class="[darkTheme==true ? 'bg-dark navbar-dark' : 'bg-light navbar-light']">
@@ -35,4 +36,3 @@ module.exports = {
     }
 }
 </script>
-    

@@ -1,8 +1,9 @@
-<script src="/cdn/vuejs/vue.min.js"></script>
-<script src="/cdn/vuejs/httpVueLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"
+    integrity="sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 
 <template>
-    <div class="card my-4">
+    <div class="card my-4" :data-aos="aostype">
         <div class="card-body">
             <h5 class="card-title">
                 <i class="fas fa-map-marked-alt"></i>
@@ -13,7 +14,7 @@
                     <thead>
                         <tr>
                             <th scope="col">區域名</th>
-                            <th scope="col">代號</th>                                    
+                            <th scope="col">代號</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -37,23 +38,23 @@
 
 <script>
 module.exports = {
-    props: ['theme', 'regions'],
+    props: ['theme', 'regions', 'aostype'],
     data() {
-        return {      
-            darkTheme: true,     
+        return {
+            darkTheme: true,
             newRegion: {
                 title: '',
                 name: ''
             },
         }
     }, 
-    methods: {       
+    methods: {
         AddRegion: function () {
             if (this.newRegion.title === '' || this.newRegion.name === '') {
                 return
             }
 
-            API.post('region', { 
+            API.post('region', {
                 'new': this.newRegion.title,
                 'id': this.newRegion.name
             }).then( (res) => {
@@ -70,14 +71,14 @@ module.exports = {
         },
         DeleteRegion: function (name) {
             Swal.fire({
-                title:              `你確定要刪除"${name}"？`,
-                text:               "這是不可逆的動作欸，你確定？",
-                icon:               'warning',
-                showCancelButton:   true,
+                title: `你確定要刪除"${name}"？`,
+                text: "這是不可逆的動作欸，你確定？",
+                icon: 'warning',
+                showCancelButton: true,
                 confirmButtonColor: '#3085d6',
-                cancelButtonColor:  '#d33',
-                confirmButtonText:  '對啦對啦',
-                cancelButtonText:   '再看看',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '對啦對啦',
+                cancelButtonText: '再看看',
             }).then((result) => {
                 if (result.isConfirmed) {
                     API.delete('region', { 
@@ -94,10 +95,10 @@ module.exports = {
         },
         UpdateRegion: function (reg) {
             Swal.fire({
-                title:            reg.title,
-                input:            'text',
-                inputLabel:       `重新命名 "${reg.title}"`,
-                inputValue:       reg.title,
+                title: reg.title,
+                input: 'text',
+                inputLabel: `重新命名 "${reg.title}"`,
+                inputValue: reg.title,
                 showCancelButton: true,
                 inputValidator: (value) => {
                     if (!value) {
@@ -111,7 +112,7 @@ module.exports = {
 
                 let value = ret.value
                 if (value != reg.title) {
-                    API.post('region', { 
+                    API.post('region', {
                         'reg': reg.name,
                         'new': value
                     }).then( (res) => {
@@ -131,22 +132,22 @@ module.exports = {
         },
         UpdateRegionID: function (reg) {
             Swal.fire({
-                title:              '警告',
-                text:               '不可重新命名代號！',
-                icon:               'warning',
-                showCancelButton:   true,
+                title: '警告',
+                text: '不可重新命名代號！',
+                icon: 'warning',
+                showCancelButton: true,
                 confirmButtonColor: '#d33',
-                cancelButtonColor:  '#3085d6',
-                confirmButtonText:  '為什麼？',
-                cancelButtonText:   '好的'
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: '為什麼？',
+                cancelButtonText: '好的'
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire({
-                        title:              '你問題真多',
-                        text:               '不行就是不行！',
-                        icon:               'error',
+                        title: '你問題真多',
+                        text: '不行就是不行！',
+                        icon: 'error',
                         confirmButtonColor: '#d33',
-                        confirmButtonText:  '喔',
+                        confirmButtonText: '喔',
                     })
                 }
             })
@@ -159,4 +160,3 @@ module.exports = {
     },
 }
 </script>
-    

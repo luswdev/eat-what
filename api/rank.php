@@ -11,7 +11,7 @@ if ($type) {
             $stmt->execute();
             $stmt->bind_result($restaurant, $rank);
 
-            while ($stmt->fetch()) {                
+            while ($stmt->fetch()) {
                 $brunch[] = [
                     'restaurant' => $restaurant,
                     'rank' => $rank
@@ -25,14 +25,14 @@ if ($type) {
             $stmt->execute();
             $stmt->bind_result($restaurant, $rank);
 
-            while ($stmt->fetch()) {                
+            while ($stmt->fetch()) {
                 $dinner[] = [
                     'restaurant' => $restaurant,
                     'rank' => $rank
                 ];
             }
 
-            $stmt->close();  
+            $stmt->close();
 
             $food = [
                 'brunch' => $brunch,
@@ -51,7 +51,7 @@ if ($type) {
             $stmt->execute();
             $stmt->bind_result($ip, $rank);
 
-            while ($stmt->fetch()) {    
+            while ($stmt->fetch()) {
                 $country = geoip_country_name_by_name($ip);
                 $key = array_search($country, $countryList);
                 $country = Locale::getDisplayRegion('-'.$key, 'zh-TW');
@@ -81,3 +81,5 @@ if ($type) {
             break;
     }
 }
+
+?>

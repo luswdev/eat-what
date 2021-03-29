@@ -1,5 +1,6 @@
-<script src="/cdn/vuejs/vue.min.js"></script>
-<script src="/cdn/vuejs/httpVueLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"
+    integrity="sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 
 <template>
     <div class="footer-copyright font-monospace container" :class="darkTheme ? 'text-white-50' : 'text-black-50'">
@@ -68,7 +69,7 @@ module.exports = {
             })
               
             if (formValues) {
-                API.post('post-mail', formValues).then( (res) => {                      
+                API.post('post-mail', formValues).then( (res) => {
                     Toast.fire({
                         icon: 'success',
                         title: '你真棒！'
@@ -76,11 +77,11 @@ module.exports = {
                 })
             } else {
                 Swal.fire({
-                    title:              '這三小',
-                    text:               '沒東西是要講個毛？',
-                    icon:               'error',
+                    title: '這三小',
+                    text: '沒東西是要講個毛？',
+                    icon: 'error',
                     confirmButtonColor: '#d33',
-                    confirmButtonText:  '嘻嘻',
+                    confirmButtonText: '嘻嘻',
                 })
             }
         }
@@ -92,4 +93,3 @@ module.exports = {
     }
 }
 </script>
-    

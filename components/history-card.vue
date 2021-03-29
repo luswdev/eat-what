@@ -1,9 +1,10 @@
-<script src="/cdn/vuejs/vue.min.js"></script>
-<script src="/cdn/vuejs/httpVueLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"
+    integrity="sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 
 <template>
-    <div class="card my-4">
-        <div class="card-body">                    
+    <div class="card my-4" :data-aos="aostype">
+        <div class="card-body">
             <h5 class="card-title">
                 <i class="fas fa-clock"></i> 
                 我決定了 {{histories.length}} 次！
@@ -42,7 +43,7 @@
 
 <script>
 module.exports = {
-    props: ['histories'],
+    props: ['histories', 'aostype'],
     data() {
         return {
             displayEntries: this.histories.slice(0, 10),
@@ -50,24 +51,24 @@ module.exports = {
             previewBtn: false,
             nextBtn: true
         }
-    }, 
+    },
     methods: {
         Preview10: function () {
             if (this.currentIdx - 10 >= 0) {
                 this.displayEntries = this.histories.slice(this.currentIdx - 10, this.currentIdx)
-                this.currentIdx    -= 10
+                this.currentIdx -= 10
             } else {
                 this.displayEntries = this.histories.slice(0, 10)
-                this.currentIdx     = 0
+                this.currentIdx = 0
             }
             this.UpdateButton()
         },
         Next10: function () {
             if (this.histories.length >= this.currentIdx + 20) {
-                this.displayEntries      = this.histories.slice(this.currentIdx + 10, this.currentIdx + 20)
-                this.currentIdx         += 10
+                this.displayEntries = this.histories.slice(this.currentIdx + 10, this.currentIdx + 20)
+                this.currentIdx += 10
             } else {
-                this.displayEntries       = this.histories.slice(this.currentIdx + 10, this.histories.length)
+                this.displayEntries = this.histories.slice(this.currentIdx + 10, this.histories.length)
                 this.currentIdx = this.histories.length
             }
             this.UpdateButton()
@@ -84,7 +85,7 @@ module.exports = {
                 this.nextBtn = false
             }
         },
-        WatchIP: function (ip) { 
+        WatchIP: function (ip) {
             window.open(`https://iplocation.com?ip=${ip}`, '_blank');
         }
     },
@@ -98,4 +99,3 @@ module.exports = {
     }
 }
 </script>
-    

@@ -10,7 +10,7 @@ $del = $_DELETE['del'] ?? false;
 
 include_once('db.php');
 
-if ($regid && $new) {        
+if ($regid && $new) {
     $query = 'SELECT RegionName FROM RegionList WHERE RegionID=?';
 	$stmt  = $conn->prepare($query);
 	$stmt->bind_param('s', $regid);
