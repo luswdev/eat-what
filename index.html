@@ -4,7 +4,41 @@
         <title>吃什麼 | LuSkywalker</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+        <!-- PWA -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="apple-mobile-web-app-title" content="EatWhat">
+
         <link rel="icon" type="image/png" href="/eat/images/favicon.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/eat/images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/eat/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/eat/images/favicon-16x16.png">
+        <link rel="mask-icon" href="/eat/images/safari-pinned-tab.svg" color="#1c2024">
+        <link rel="shortcut icon" href="/eat/images/favicon.ico">
+
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#1C2024">
+
+        <link rel="manifest" href="/eat/data/manifest.json" />
+
+        <!-- Primary Meta Tags -->
+        <meta name="title" content="吃什麼 | LuSkywalker">
+        <meta name="description" content="幫我想今天要吃什麼">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://lusw.dev/eat/">
+        <meta property="og:title" content="吃什麼 | LuSkywalker">
+        <meta property="og:description" content="幫我想今天要吃什麼">
+        <meta property="og:image" content="https://lusw.dev/eat/images/favicon.png">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://lusw.dev/eat/">
+        <meta property="twitter:title" content="吃什麼 | LuSkywalker">
+        <meta property="twitter:description" content="幫我想今天要吃什麼">
+        <meta property="twitter:image" content="https://lusw.dev/eat/images/favicon.png">
 
         <!-- JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
@@ -30,6 +64,17 @@
         <link href="/eat/styles/dark.css?v=2102242355" rel="stylesheet" type="text/css">
         <link href="/eat/styles/main.css?v=2103291345" rel="stylesheet" type="text/css">
         <link href="/eat/styles/helper.css?v=2103291501" rel="stylesheet" type="text/css">
+
+        <!-- Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-MRT8N6Y0SV"></script>
+        <script>
+            window.dataLayer = window.dataLayer || []
+            function gtag () {
+                dataLayer.push(arguments)
+            }
+            gtag('js', new Date())
+            gtag('config', 'G-MRT8N6Y0SV')
+        </script>
 	</head>
 <body class="min-vh-100 d-flex flex-column">
     <header id="vue-header">

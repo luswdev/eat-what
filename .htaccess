@@ -1,5 +1,4 @@
 Redirect 403 /eat/data/config.json
-Redirect 403 /eat/data/
 
 RewriteEngine On
 RewriteBase /eat

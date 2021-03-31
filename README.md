@@ -9,6 +9,8 @@
 Goto [Eat What](https://lusw.dev/eat) website.
 
 ## Change Log
+- v2.3.0
+    - 支援 PMA，現在可以加入主畫面，就像一個應用程式
 - v2.2.2
     - 以 AOS 渲染部分動畫
 - v2.2.1
