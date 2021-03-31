@@ -3,7 +3,7 @@ $resid  = $_POST['res']  ?? false;
 $res    = $_POST['new']  ?? false;
 $when   = $_POST['when'] ?? false;
 
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE') { 
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $_DELETE = json_decode(file_get_contents('php://input'), true);
 }
 $del  = $_DELETE['res'] ?? false;
