@@ -9,7 +9,7 @@
                 <i class="fas fa-question-circle"></i>
                 吃哪餐好呢？
             </h5>
-            <div id="when-chart" style="width: 100%;height:400px;"></div>
+            <div id="when-chart" style="width: 100%; height:400px;"></div>
         </div>
     </div>
 </template>
@@ -17,7 +17,7 @@
 <script>
 module.exports = {
     props: ['theme', 'ranked', 'aostype'],
-    data() {
+    data: function () {
         return {
             chartDom: undefined,
             chart: undefined,
@@ -72,7 +72,7 @@ module.exports = {
                         emphasis: {
                             focus: 'series'
                         },
-                        data: [this.ranked.filter(x=>x.when=='早餐').length]
+                        data: [this.ranked.filter(x => x.when === '早餐').length]
                     },
                     {
                         name: '晚餐',
@@ -84,23 +84,23 @@ module.exports = {
                         emphasis: {
                             focus: 'series'
                         },
-                        data: [this.ranked.filter(x=>x.when=='晚餐').length]
+                        data: [this.ranked.filter(x => x.when === '晚餐').length]
                     }
                 ]
             }
         }
     }, 
     watch: {
-        theme(newVal) {
+        theme: function (newVal) {
             this.option.darkMode = newVal;
             this.option.textStyle.color = newVal ? '#fff' : '#212529'
             this.option.legend.textStyle.color = newVal ? '#fff' : '#212529'
             this.option.legend.pageTextStyle.color = newVal ? '#fff' : '#212529'
             this.chart.setOption(this.option)
         },
-        ranked(newData) {    
-            this.option.series[0].data[0] = newData.filter(x=>x.when=='早餐').length
-            this.option.series[1].data[0] = newData.filter(x=>x.when=='晚餐').length
+        ranked: function (newData) {    
+            this.option.series[0].data[0] = newData.filter(x => x.when === '早餐').length
+            this.option.series[1].data[0] = newData.filter(x => x.when === '晚餐').length
             this.chart.setOption(this.option)
         }
     },

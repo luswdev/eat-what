@@ -33,8 +33,12 @@
             </div>
             <div class="text-end">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button title="Preview 10 row" type="button" class="btn btn-primary" :disabled="previewBtn == false" @click="Preview10">前 10 筆</button>
-                    <button title="Next 10 row" type="button" class="btn btn-primary" :disabled="nextBtn == false" @click="Next10">後 10 筆</button>
+                    <button title="Preview 10 row" type="button" class="btn btn-primary" :disabled="previewBtn === false" @click="Preview10">
+						前 10 筆
+					</button>
+                    <button title="Next 10 row" type="button" class="btn btn-primary" :disabled="nextBtn === false" @click="Next10">
+						後 10 筆
+					</button>
                 </div>
             </div>
         </div>
@@ -44,7 +48,7 @@
 <script>
 module.exports = {
     props: ['histories', 'aostype'],
-    data() {
+    data: function () {
         return {
             displayEntries: this.histories.slice(0, 10),
             currentIdx: 0,
@@ -90,7 +94,7 @@ module.exports = {
         }
     },
     watch: {
-        histories(newEntries) {
+        histories: function (newEntries) {
             this.displayEntries = newEntries.slice(0, 10)
             this.currentIdx = 0
             this.previewBtn = false

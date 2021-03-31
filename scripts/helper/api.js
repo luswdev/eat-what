@@ -5,7 +5,7 @@
 'use strict';
 
 class APIs {
-    BuildFormData(data) {
+    BuildFormData (data) {
         let bodyFormData = new FormData()
         
         if (data) {
@@ -17,26 +17,26 @@ class APIs {
         return bodyFormData
     }
 
-    post(url, data, config) {
+    post (url, data, config) {
         let bodyFormData = this.BuildFormData(data)
         return axios.post(`/eat/api/${url}`, bodyFormData, config)
     }
 
-    get(url, data) {
+    get (url, data) {
         let bodyFormData = this.BuildFormData(data)
         return axios.get(`/eat/api/${url}`, { params: bodyFormData })
     }
 
-    delete(url, data) {
+    delete (url, data) {
         return axios.delete(`/eat/api/${url}`, { data: data })
     }
 
-    put(url, data) {
+    put (url, data) {
         let bodyFormData = this.BuildFormData(data)
         return axios.put(`/eat/api/${url}`, bodyFormData)
     }
 
-    patch(url, data) {
+    patch (url, data) {
         let bodyFormData = this.BuildFormData(data)
         return axios.patch(`/eat/api/${url}`, bodyFormData)
     }

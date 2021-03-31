@@ -61,10 +61,18 @@ li.list-group-item {
 
 .first-rank {
     color: var(--text-first);
+    vertical-align: bottom;
+}
+
+.first-rank .restaurant-rank-name {
+    font-size: 1.2rem;
 }
 
 #accept-card {
     z-index: 1080;
-    opacity: 0.8;
     width: calc(100% - 2rem);
+}
+
+#accept-card .card {
+    box-shadow: var(--shadow-lg);
 }

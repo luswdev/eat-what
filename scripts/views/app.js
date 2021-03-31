@@ -67,7 +67,7 @@ let app = new Vue({
 
                 if (defaultRegion !== '') {
                     let validRegion = false;
-                    this.regionList.forEach(region => {     
+                    this.regionList.forEach(region => {
                         if (region.name === defaultRegion) {
                             validRegion = true
                             this.selectedRegion = defaultRegion
@@ -117,16 +117,14 @@ let app = new Vue({
         this.GetRankList('restaurant')
 
         /* update every 10 mins */
-        setInterval(() => {
+        setInterval( () => {
             this.GrabHistory()
         }, 600000);
     },
     updated: function () {
-        
         AOS.init({
             easing: 'ease-in-out-sine',
             duration: 700
         })
-
     }
 })

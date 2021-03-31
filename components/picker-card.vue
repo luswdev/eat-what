@@ -27,7 +27,7 @@
                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" v-model="picked.current" :value="picked.dinner">
                         <label class="form-check-label" for="inlineRadio2">吃晚餐</label>
                     </div>
-                    <button class="btn mr-1 btn-primary" @click="ShowResult" :disabled="started == 0">幫我想！</button>
+                    <button class="btn mr-1 btn-primary" @click="ShowResult" :disabled="!started">幫我想！</button>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
 <script>
 module.exports = {
     props: ['regions', 'current', 'started', 'restaurants', 'aostype'],
-    data() {
+    data: function () {
         return {
             restaurantResult: '-',
             openCnt: 0,
@@ -58,7 +58,7 @@ module.exports = {
                     title: '那就吃...',
                     text: '自己想啦幹',
                     icon: 'error',
-                    confirmButtonColor: '#d33',
+                    confirmButtonColor: '#dc3545',
                     confirmButtonText: '幹勒'
                 })
                 return;
@@ -66,7 +66,7 @@ module.exports = {
 
             /* dump restaurant list */
             let pool = this.restaurants.dinner.slice(0, this.restaurants.dinner.length)
-            if (this.picked.current == this.picked.brunch) {
+            if (this.picked.current === this.picked.brunch) {
                 pool = this.restaurants.brunch.slice(0, this.restaurants.brunch.length)
             }
 
@@ -75,7 +75,7 @@ module.exports = {
                     title: '那就吃...',
                     text: '我也不知道要吃什麼，呵呵',
                     icon: 'warning',
-                    confirmButtonColor: '#d33',
+                    confirmButtonColor: '#dc3545',
                     confirmButtonText: '幹勒'
                 })
                 return;
@@ -88,15 +88,15 @@ module.exports = {
                 title: '那就吃...',
                 html: `<b class="result-name">${this.restaurantResult}</b>，你說好不好？`,
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#0d6efd',
                 confirmButtonText: '蛤？',
                 cancelButtonText: '好！'
-            }).then((result) => {
+            }).then( (result) => {
                 API.post('picked-log', {
                     'rid': pool[poolIdx].rid,
                     'list': this.cur,
-                }).then( (res) => {
+                }).then( () => {
                     this.$parent.GrabHistory()
                 })
 
@@ -118,19 +118,19 @@ module.exports = {
         }
     },
     watch: {
-        current(newVal) {
+        current: function (newVal) {
             this.selecting = newVal
         },
-        'picked.current': function(newVal) {
+        'picked.current': function (newVal) {
             header.picked = newVal
         },
-        selecting(newVal) {
+        selecting: function (newVal) {
             this.$emit('input', newVal)
             this.$parent.GetRestaurantList()
 
             if (Window.acceptCookies) {  
                 for (let i = 0; i < this.regions.length; ++i) {
-                    if (this.selecting == this.regions[i].name) {
+                    if (this.selecting === this.regions[i].name) {
                         Cookies.set('default-index', i)
                         break
                     }
@@ -138,7 +138,7 @@ module.exports = {
             }
         }
     },
-    mounted: function() {
+    mounted: function () {
         if (Window.acceptCookies) {
             if (!Cookies.get('default-index')) {
                 Cookies.set('default-index', 0)

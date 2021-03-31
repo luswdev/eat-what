@@ -5,9 +5,10 @@
 <template>
     <div class="card h-100" :data-aos="aostype">
         <div class="card-body flex-grow-0">
-            <h5 class="card-title">
-                <i class="fas fa-bread-slice"></i>
-                有這些{{type == 'brunch' ? '早餐' : '晚餐'}}！
+            <h5 class="card-title">                
+                <i v-if="type === 'brunch'" class="fas fa-bread-slice"></i>
+                <i v-else class="fas fa-hamburger"></i>
+                有這些{{type === 'brunch' ? '早餐' : '晚餐'}}！
             </h5>
         </div>
         <ul class="list-group list-group-flush">
@@ -19,7 +20,7 @@
                 <form @submit.prevent="AddRestaruant">
                     <div class="input-group mb-3">
                         <input class="form-control" type="text" placeholder="吃這家早餐啦" aria-label="new brunch" v-model="newRestaurant">
-                        <button title="add restaurant" type="button" class="btn btn-secondary" :disabled="newRestaurant == ''" @click="AddRestaruant"><i class="fas fa-plus"></i></button>
+                        <button title="add restaurant" type="button" class="btn btn-secondary" :disabled="newRestaurant === ''" @click="AddRestaruant"><i class="fas fa-plus"></i></button>
                     </div>
                 </form>
             </li>
@@ -30,7 +31,7 @@
 <script>
 module.exports = {
     props: ['type', 'restaurants', 'theme', 'region', 'aostype'],
-    data() {
+    data: function () {
         return {
             darkTheme: true,
             newRestaurant: ''
@@ -42,14 +43,14 @@ module.exports = {
                 'new':  this.newRestaurant,
                 'list': this.region,
                 'when': this.type
-            }).then((res) => {
+            }).then( () => {
                 this.$parent.GetRestaurantList()
                 Toast.fire({
                     icon: 'success',
                     title: `我知道有「${this.newRestaurant}」可以吃喔！`
                 })
                 this.newRestaurant = ''
-            }).catch( (err) => {
+            }).catch( () => {
                 Toast.fire({
                     icon:  'error',
                     title: '你確定？'
@@ -75,6 +76,10 @@ module.exports = {
                 inputLabel: `重新命名 "${res.restaurant}"`,
                 inputValue: res.restaurant,
                 showCancelButton: true,
+                confirmButtonColor: '#0d6efd',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: '就這樣！',
+                cancelButtonText: '還是算了',
                 inputValidator: (value) => {
                     if (!value) {
                         return '什麼啦！'
@@ -107,10 +112,10 @@ module.exports = {
         }
     },
     watch: {
-        darkTheme(newVal) {
+        darkTheme: function (newVal) {
             this.$emit('input', newVal)
         },
-        theme(newVal) {
+        theme: function (newVal) {
             this.darkTheme = newVal;
         }
     }

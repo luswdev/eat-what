@@ -29,7 +29,7 @@
             integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
         <link href="/eat/styles/dark.css?v=2102242355" rel="stylesheet" type="text/css">
         <link href="/eat/styles/main.css?v=2103291345" rel="stylesheet" type="text/css">
-        <link href="/eat/styles/helper.css?v=2103212325" rel="stylesheet" type="text/css">
+        <link href="/eat/styles/helper.css?v=2103291501" rel="stylesheet" type="text/css">
 	</head>
 <body class="min-vh-100 d-flex flex-column">
     <header id="vue-header">
@@ -38,6 +38,7 @@
 
     <main class="container" id="app">
         <div class="main-inner">
+            <!-- cookies accept popup card -->
             <cookies-accept v-if="needAccept === true" v-model="needAccept"></cookies-accept>
 
             <!-- picker option card -->
@@ -83,10 +84,10 @@
     </footer>
 
     <!-- application JavaScript -->
-    <script src="/eat/scripts/helper/api.js?v=2102171618"></script>
+    <script src="/eat/scripts/helper/api.js?v=2103301121"></script>
     <script src="/eat/scripts/helper/toast.js?v=2102211953"></script>
-    <script src="/eat/scripts/views/app.js?v=2103291345"></script>
-    <script src="/eat/scripts/views/footer.js?v=2140237237"></script>
-    <script src="/eat/scripts/views/header.js?v=2103240237"></script>
+    <script src="/eat/scripts/views/app.js?v=2103301121"></script>
+    <script src="/eat/scripts/views/footer.js?v=2103301121"></script>
+    <script src="/eat/scripts/views/header.js?v=2103301121"></script>
 </body>
 </html>

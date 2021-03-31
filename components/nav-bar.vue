@@ -3,10 +3,10 @@
 <script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 
 <template>
-    <nav class="navbar navbar-expand py-3" :class="[darkTheme==true ? 'bg-dark navbar-dark' : 'bg-light navbar-light']">
+    <nav class="navbar navbar-expand py-3" :class="darkTheme ? 'bg-dark navbar-dark' : 'bg-light navbar-light'">
         <div class="container">
             <span class="navbar-brand mb-0 h1 mr-0 mr-md-2">
-                <i v-if="picked=='brunch'" class="fas fa-bread-slice"></i>
+                <i v-if="picked === 'brunch'" class="fas fa-bread-slice"></i>
                 <i v-else class="fas fa-hamburger"></i>
                 {{title}}
             </span>
@@ -21,16 +21,16 @@
 <script>
 module.exports = {
     props: ['title', 'theme', 'picked'],
-    data() {
+    data: function () {
         return {
             darkTheme: true
         }
     },
     watch: {
-        darkTheme(newVal) {
+        darkTheme: function (newVal) {
             this.$emit('input', newVal)
         },
-        theme(newVal) {
+        theme: function (newVal) {
             this.darkTheme = newVal;
         }
     }

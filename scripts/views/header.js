@@ -14,7 +14,7 @@ let header = new Vue({
         'nav-bar': httpVueLoader('/eat/components/nav-bar.vue')
     },
     watch: {
-        darkTheme(theme) {
+        darkTheme: function (theme) {
             this.darkTheme = theme
             if (this.darkTheme) {
                 document.body.classList.add('dark')

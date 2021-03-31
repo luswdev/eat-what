@@ -16,7 +16,7 @@ let footer = new Vue({
         'b2t': httpVueLoader('/eat/components/b2t.vue')
     },
     mounted: function () {
-        API.get('web-info').then((ret) => {
+        API.get('web-info').then( (ret) => {
             let json = ret.data
             this.copyrightYear = json.copyright
             this.versionNumber = json.version

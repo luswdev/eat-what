@@ -22,7 +22,9 @@
                         <tr v-for="reg in regions" :key="reg.name">
                             <td @click="UpdateRegion(reg)">{{reg.title}}</td>
                             <td @click="UpdateRegionID(reg)">{{reg.name}}</td>
-                            <td><button title="delete region" type="button" class="btn-close float-end" :class="darkTheme ? 'btn-close-white' : ''" @click.stop="DeleteRegion(reg.title)"></button></td>
+                            <td>
+                                <button title="delete region" type="button" class="btn-close float-end" :class="darkTheme ? 'btn-close-white' : ''" @click.stop="DeleteRegion(reg.title)"></button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -30,7 +32,9 @@
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="我要這個區域" aria-label="new title" v-model="newRegion.title">
                 <input type="text" class="form-control" placeholder="就叫它這個代號！" aria-label="new name" v-model="newRegion.name">
-                <button title="add region"  type="button" class="btn btn-secondary" :disabled="newRegion.title == '' | newRegion.name == ''" @click="AddRegion"><i class="fas fa-plus"></i></button>
+                <button title="add region"  type="button" class="btn btn-secondary" :disabled="newRegion.title === '' | newRegion.name === ''" @click="AddRegion">
+                    <i class="fas fa-plus"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -39,7 +43,7 @@
 <script>
 module.exports = {
     props: ['theme', 'regions', 'aostype'],
-    data() {
+    data: function () {
         return {
             darkTheme: true,
             newRegion: {
@@ -57,7 +61,7 @@ module.exports = {
             API.post('region', {
                 'new': this.newRegion.title,
                 'id': this.newRegion.name
-            }).then( (res) => {
+            }).then( () => {
                 this.$parent.GetRegionList()
 
                 Toast.fire({
@@ -83,7 +87,7 @@ module.exports = {
                 if (result.isConfirmed) {
                     API.delete('region', { 
                         'del': name,
-                    }).then( (res) => {
+                    }).then( () => {
                         this.$parent.GetRegionList()
                         Toast.fire({
                             icon: 'success',
@@ -99,7 +103,11 @@ module.exports = {
                 input: 'text',
                 inputLabel: `重新命名 "${reg.title}"`,
                 inputValue: reg.title,
-                showCancelButton: true,
+                showCancelButton: true,                
+                confirmButtonColor: '#0d6efd',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: '就這樣！',
+                cancelButtonText: '還是算了',
                 inputValidator: (value) => {
                     if (!value) {
                         return '什麼啦！'
@@ -115,7 +123,7 @@ module.exports = {
                     API.post('region', {
                         'reg': reg.name,
                         'new': value
-                    }).then( (res) => {
+                    }).then( () => {
                         this.$parent.GetRegionList()
                         Toast.fire({
                             icon: 'success',
@@ -136,17 +144,17 @@ module.exports = {
                 text: '不可重新命名代號！',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#0d6efd',
                 confirmButtonText: '為什麼？',
                 cancelButtonText: '好的'
-            }).then((result) => {
+            }).then( (result) => {
                 if (result.isConfirmed) {
                     Swal.fire({
                         title: '你問題真多',
                         text: '不行就是不行！',
                         icon: 'error',
-                        confirmButtonColor: '#d33',
+                        confirmButtonColor: '#dc3545',
                         confirmButtonText: '喔',
                     })
                 }
@@ -154,7 +162,7 @@ module.exports = {
         }
     },
     watch: {
-        theme(newVal) {
+        theme: function (newVal) {
             this.darkTheme = newVal;
         }
     },
