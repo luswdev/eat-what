@@ -9,6 +9,8 @@
 Goto [Eat What](https://lusw.dev/eat) website.
 
 ## Change Log
+- v2.2.2
+    - 以 AOS 渲染部分動畫
 - v2.2.1
     - 新增讓使用者選擇要不要使用 cookies 的按鈕
 - v2.2.0
