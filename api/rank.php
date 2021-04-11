@@ -8,6 +8,7 @@ if ($type) {
         case 'restaurant':
             $query = 'SELECT b.Restaurant, COUNT(*) Ranks FROM PickedLog a INNER JOIN RestaurantList b ON a.RID = b.RID WHERE b.OpenTime = \'brunch\' GROUP BY b.Restaurant ORDER BY Ranks DESC LIMIT 5';
             $stmt  = $conn->prepare($query);
+
             $stmt->execute();
             $stmt->bind_result($restaurant, $rank);
 
@@ -22,6 +23,7 @@ if ($type) {
 
             $query = 'SELECT b.Restaurant, COUNT(*) Ranks FROM PickedLog a INNER JOIN RestaurantList b ON a.RID = b.RID WHERE b.OpenTime = \'dinner\' GROUP BY b.Restaurant ORDER BY Ranks DESC LIMIT 5';
             $stmt  = $conn->prepare($query);
+            
             $stmt->execute();
             $stmt->bind_result($restaurant, $rank);
 
@@ -39,7 +41,7 @@ if ($type) {
                 'dinner' => $dinner,
             ];
             
-            $food = json_encode($food,  JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            $food = json_encode($food, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             print_r($food);
             break;
 
@@ -48,6 +50,7 @@ if ($type) {
 
             $query = 'SELECT PickFrom, COUNT(*) Ranks FROM PickedLog GROUP BY PickFrom ORDER BY Ranks DESC';
             $stmt  = $conn->prepare($query);
+
             $stmt->execute();
             $stmt->bind_result($ip, $rank);
 
@@ -61,6 +64,7 @@ if ($type) {
                     'country' => $country
                 ];
             }
+
             $stmt->close();
 
             $ranked = [];
@@ -76,7 +80,7 @@ if ($type) {
                 }
             }
 
-            $ranked = json_encode($ranked,  JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            $ranked = json_encode($ranked, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             print_r($ranked);
             break;
     }

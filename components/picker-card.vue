@@ -48,7 +48,7 @@ module.exports = {
                 current: ''
             },
         }
-    }, 
+    },
     methods: {
         ShowResult: function () {
             this.openCnt++
@@ -58,8 +58,11 @@ module.exports = {
                     title: '那就吃...',
                     text: '自己想啦幹',
                     icon: 'error',
-                    confirmButtonColor: '#dc3545',
-                    confirmButtonText: '幹勒'
+                    buttonsStyling: false,
+                    confirmButtonText: '幹勒',
+                    customClass: {
+                        confirmButton: 'btn btn-danger',
+                    }
                 })
                 return;
             }
@@ -75,8 +78,11 @@ module.exports = {
                     title: '那就吃...',
                     text: '我也不知道要吃什麼，呵呵',
                     icon: 'warning',
-                    confirmButtonColor: '#dc3545',
-                    confirmButtonText: '幹勒'
+                    buttonsStyling: false,
+                    confirmButtonText: '幹勒',
+                    customClass: {
+                        confirmButton: 'btn btn-danger',
+                    }
                 })
                 return;
             }
@@ -88,10 +94,14 @@ module.exports = {
                 title: '那就吃...',
                 html: `<b class="result-name">${this.restaurantResult}</b>，你說好不好？`,
                 showCancelButton: true,
-                confirmButtonColor: '#dc3545',
-                cancelButtonColor: '#0d6efd',
+                buttonsStyling: false,
+                focusCancel: true,
                 confirmButtonText: '蛤？',
-                cancelButtonText: '好！'
+                cancelButtonText: '好！',
+                customClass: {
+                    confirmButton: 'btn btn-danger mx-1',
+                    cancelButton: 'btn btn-primary mx-1'
+                }
             }).then( (result) => {
                 API.post('picked-log', {
                     'rid': pool[poolIdx].rid,
@@ -128,7 +138,7 @@ module.exports = {
             this.$emit('input', newVal)
             this.$parent.GetRestaurantList()
 
-            if (Window.acceptCookies) {  
+            if (Window.acceptCookies) {
                 for (let i = 0; i < this.regions.length; ++i) {
                     if (this.selecting === this.regions[i].name) {
                         Cookies.set('default-index', i, { expires: 365 })

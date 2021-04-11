@@ -51,7 +51,7 @@ module.exports = {
                 name: ''
             },
         }
-    }, 
+    },
     methods: {
         AddRegion: function () {
             if (this.newRegion.title === '' || this.newRegion.name === '') {
@@ -79,10 +79,14 @@ module.exports = {
                 text: "這是不可逆的動作欸，你確定？",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                buttonsStyling: false,
+                focusCancel: true,
                 confirmButtonText: '對啦對啦',
                 cancelButtonText: '再看看',
+                customClass: {
+                    confirmButton: 'btn btn-primary mx-1',
+                    cancelButton: 'btn btn-danger mx-1'
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
                     API.delete('region', { 
@@ -103,11 +107,15 @@ module.exports = {
                 input: 'text',
                 inputLabel: `重新命名 "${reg.title}"`,
                 inputValue: reg.title,
-                showCancelButton: true,                
-                confirmButtonColor: '#0d6efd',
-                cancelButtonColor: '#6c757d',
+                showCancelButton: true,
+                buttonsStyling: false,
+                focusCancel: true,
                 confirmButtonText: '就這樣！',
                 cancelButtonText: '還是算了',
+                customClass: {
+                    confirmButton: 'btn btn-primary mx-1',
+                    cancelButton: 'btn btn-secondary mx-1'
+                },
                 inputValidator: (value) => {
                     if (!value) {
                         return '什麼啦！'
@@ -133,7 +141,7 @@ module.exports = {
                 } else {
                     Toast.fire({
                         icon: 'warning',
-                        title: '啊不是長一樣嗎？'
+                        title: '啊不是長一樣嗎？',
                     })
                 }
             })
@@ -144,18 +152,25 @@ module.exports = {
                 text: '不可重新命名代號！',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#dc3545',
-                cancelButtonColor: '#0d6efd',
+                buttonsStyling: false,
+                focusCancel: true,
                 confirmButtonText: '為什麼？',
-                cancelButtonText: '好的'
+                cancelButtonText: '好的',
+                customClass: {
+                    confirmButton: 'btn btn-danger mx-1',
+                    cancelButton: 'btn btn-primary mx-1'
+                }
             }).then( (result) => {
                 if (result.isConfirmed) {
                     Swal.fire({
                         title: '你問題真多',
                         text: '不行就是不行！',
                         icon: 'error',
-                        confirmButtonColor: '#dc3545',
+                        buttonsStyling: false,
                         confirmButtonText: '喔',
+                        customClass: {
+                            confirmButton: 'btn btn-danger',
+                        }
                     })
                 }
             })

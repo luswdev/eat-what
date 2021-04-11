@@ -6,7 +6,7 @@
     <div class="card my-4" :data-aos="aostype">
         <div class="card-body">
             <h5 class="card-title">
-                <i class="fas fa-clock"></i> 
+                <i class="fas fa-clock"></i>
                 我決定了 {{histories.length}} 次！
             </h5>
             <div class="table-responsive-sm">
@@ -34,11 +34,11 @@
             <div class="text-end">
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <button title="Preview 10 row" type="button" class="btn btn-primary" :disabled="previewBtn === false" @click="Preview10">
-						前 10 筆
-					</button>
+                        前 10 筆
+                    </button>
                     <button title="Next 10 row" type="button" class="btn btn-primary" :disabled="nextBtn === false" @click="Next10">
-						後 10 筆
-					</button>
+                        後 10 筆
+                    </button>
                 </div>
             </div>
         </div>

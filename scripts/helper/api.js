@@ -2,7 +2,7 @@
  * api.js
  */
 
-'use strict';
+'use strict'
 
 class APIs {
     BuildFormData (data) {

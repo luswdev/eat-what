@@ -76,12 +76,12 @@ module.exports = {
             this.option.legend.pageTextStyle.color = newVal ? '#fff' : '#212529'
             this.chart.setOption(this.option)
         },
-        ranked: function (newData) {    
+        ranked: function (newData) {
             this.option.series[0].data = newData
             this.chart.setOption(this.option)
         }
     },
-    mounted: function () {   
+    mounted: function () {
         this.chartDom = document.getElementById('country-chart'),
         this.chart = echarts.init(this.chartDom),
         this.chart.setOption(this.option)

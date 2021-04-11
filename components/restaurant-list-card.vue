@@ -5,7 +5,7 @@
 <template>
     <div class="card h-100" :data-aos="aostype">
         <div class="card-body flex-grow-0">
-            <h5 class="card-title">                
+            <h5 class="card-title">
                 <i v-if="type === 'brunch'" class="fas fa-bread-slice"></i>
                 <i v-else class="fas fa-hamburger"></i>
                 有這些{{type === 'brunch' ? '早餐' : '晚餐'}}！
@@ -14,7 +14,7 @@
         <ul class="list-group list-group-flush">
             <li v-for="res in restaurants" class="list-group-item list-group-item-action" @click="EditRestaurant(res)" :key="res.rid">
                 <span class="restuarant-name">{{res.restaurant}}</span>
-                <button title="delete restaurant" type="button" class="btn-close float-end" :class="darkTheme ? 'btn-close-white' : ''" @click.stop="DeleteRestaurant(res.rid)"></button>
+                <button title="delete restaurant" type="button" class="btn-close float-end" :class="darkTheme ? 'btn-close-white' : ''" @click.stop="DeleteRestaurant(res)"></button>
             </li>
             <li class="list-group-item">
                 <form @submit.prevent="AddRestaruant">
@@ -57,16 +57,33 @@ module.exports = {
                 })
             })
         },
-        DeleteRestaurant: function (del) {
-            API.delete('restaurant', {
-                'res': del,
-                'list': this.region,
-            }).then( () => {
-                this.$parent.GetRestaurantList()
-                Toast.fire({
-                    icon: 'success',
-                    title: '刪除成功！我連刪了什麼都不記得了。'
-                })
+        DeleteRestaurant: function (rest) {
+            Swal.fire({
+                title: `你確定要刪除"${rest.restaurant}"？`,
+                text: "這是不可逆的動作欸，你確定？",
+                icon: 'warning',
+                showCancelButton: true,
+                buttonsStyling: false,
+                focusCancel: true,
+                confirmButtonText: '對啦對啦',
+                cancelButtonText: '再看看',
+                customClass: {
+                    confirmButton: 'btn btn-primary mx-1',
+                    cancelButton: 'btn btn-danger mx-1'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    API.delete('restaurant', {
+                        'res': rest.rid,
+                        'list': this.region,
+                    }).then( () => {
+                        this.$parent.GetRestaurantList()
+                        Toast.fire({
+                            icon: 'success',
+                            title: '刪除成功！我連刪了什麼都不記得了。'
+                        })
+                    })
+                }
             })
         },
         EditRestaurant: function (res) {
@@ -76,10 +93,14 @@ module.exports = {
                 inputLabel: `重新命名 "${res.restaurant}"`,
                 inputValue: res.restaurant,
                 showCancelButton: true,
-                confirmButtonColor: '#0d6efd',
-                cancelButtonColor: '#6c757d',
+                buttonsStyling: false,
+                focusCancel: true,
                 confirmButtonText: '就這樣！',
                 cancelButtonText: '還是算了',
+                customClass: {
+                    confirmButton: 'btn btn-primary mx-1',
+                    cancelButton: 'btn btn-secondary mx-1'
+                },
                 inputValidator: (value) => {
                     if (!value) {
                         return '什麼啦！'

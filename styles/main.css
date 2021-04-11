@@ -76,3 +76,7 @@ li.list-group-item {
 #accept-card .card {
     box-shadow: var(--shadow-lg);
 }
+
+.swal2-popup {
+    box-shadow: var(--shadow);
+}

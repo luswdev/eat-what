@@ -25,6 +25,6 @@ let footer = new Vue({
             if (curYear != parseInt(this.copyrightYear)) {
                 this.copyrightYear = `${this.copyrightYear} ~ ${curYear}`
             }
-        })  
+        })
     }
 })

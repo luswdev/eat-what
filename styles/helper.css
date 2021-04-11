@@ -9,6 +9,7 @@
         --text-color: #fff;
         --text-first: #fac858;
         --text-link: #539bf5;
+        --shadow: 0 0 1rem rgba(255, 255, 255, .15)!important;
         --shadow-lg: 0 .5rem 1rem rgba(255, 255, 255, .15) !important;
         --drop-down-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%239CADBF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     }
@@ -24,6 +25,7 @@
         --text-color: #212529;
         --text-first: #E5B751;
         --text-link: #0366d6;
+        --shadow: 0 0 1rem rgba(0, 0, 0, .15)!important;
         --shadow-lg: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
         --drop-down-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     }
@@ -39,6 +41,7 @@ body.dark {
     --text-color: #fff;
     --text-first: #fac858;
     --text-link: #539bf5;
+    --shadow: 0 0 1rem rgba(255, 255, 255, .15)!important;
     --shadow-lg: 0 .5rem 1rem rgba(255, 255, 255, .15) !important;
     --drop-down-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%239CADBF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
 }
@@ -52,6 +55,7 @@ body.light {
     --text-color: #212529;
     --text-first: #E5B751;
     --text-link: #0366d6;
+    --shadow: 0 0 1rem rgba(0, 0, 0, .15)!important;
     --shadow-lg: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
     --drop-down-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
 }
@@ -75,13 +79,13 @@ body,
 .form-control {
     border-color: var(--form-border-color);
 }
- 
+
 .table-hover>tbody>tr:hover {
     --bs-table-accent-bg: var(--list-bg-hover-color);
     color: var(--text-color);
 }
 
-.list-group-item-action:focus, 
+.list-group-item-action:focus,
 .list-group-item-action:hover {
     background-color: var(--list-bg-hover-color);
     color: var(--text-color);

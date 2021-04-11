@@ -2,7 +2,7 @@
  * toast.js
  */
 
-'use strict';
+'use strict'
 
 const Toast = Swal.mixin({
     toast: true,

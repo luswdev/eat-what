@@ -89,7 +89,7 @@ module.exports = {
                 ]
             }
         }
-    }, 
+    },
     watch: {
         theme: function (newVal) {
             this.option.darkMode = newVal;
@@ -104,7 +104,7 @@ module.exports = {
             this.chart.setOption(this.option)
         }
     },
-    mounted: function() {   
+    mounted: function() {
         this.chartDom = document.getElementById('when-chart'),
         this.chart = echarts.init(this.chartDom),
         this.chart.setOption(this.option)
