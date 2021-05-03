@@ -1,0 +1,22 @@
+{
+    "name": "吃什麼",
+    "short_name": "Eat-What",
+    "icons": [
+        {
+            "src": "/eat/images/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/eat/images/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "splash_pages": null,
+    "start_url": "/eat/",
+    "display": "standalone",
+    "theme_color": "#1C2024",
+    "orientation": "portrait",
+    "background_color": "#ffffff"
+}

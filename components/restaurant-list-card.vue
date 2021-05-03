@@ -39,7 +39,8 @@ module.exports = {
     },
     methods: {
         AddRestaruant: function () {
-            API.post('restaurant', {
+            API.post('api', {
+                'type': 'restaurant',
                 'new':  this.newRestaurant,
                 'list': this.region,
                 'when': this.type
@@ -73,7 +74,8 @@ module.exports = {
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    API.delete('restaurant', {
+                    API.delete('api', {
+                        'type': 'restaurant',
                         'res': rest.rid,
                         'list': this.region,
                     }).then( () => {
@@ -113,7 +115,8 @@ module.exports = {
 
                 let value = ret.value
                 if (value != res.restaurant) {
-                    API.post('restaurant', {
+                    API.post('api', {
+                        'type': 'restaurant',
                         'res': res.rid,
                         'new': value
                     }).then((res) => {

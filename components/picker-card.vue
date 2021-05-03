@@ -141,7 +141,7 @@ module.exports = {
             if (Window.acceptCookies) {
                 for (let i = 0; i < this.regions.length; ++i) {
                     if (this.selecting === this.regions[i].name) {
-                        Cookies.set('default-index', i, { expires: 365 })
+                        Cookies.set('default-index', i, { expires: 365, path: 'eat' })
                         break
                     }
                 }
@@ -151,7 +151,7 @@ module.exports = {
     mounted: function () {
         if (Window.acceptCookies) {
             if (!Cookies.get('default-index')) {
-                Cookies.set('default-index', 0, { expires: 365 })
+                Cookies.set('default-index', 0, { expires: 365, path: 'eat' })
             }
         }
 
