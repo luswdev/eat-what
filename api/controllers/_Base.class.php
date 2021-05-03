@@ -25,39 +25,33 @@ class API
 
     public function Run ()
     {
-        $ret = false;
+        $api = false;
 
         switch ($this->type) {
         case 'web-info':
-            $ret = $this->WebInfo();
-            break;
+            return $this->WebInfo();
         
         case 'picked-log':
             $api = new PickedLogAPI();
-            $ret = $api->Run();
             break;
 
         case 'restaurant':
             $api = new RestaurantAPI();
-            $ret = $api->Run();
             break;
 
         case 'region':
             $api = new RegionAPI();
-            $ret = $api->Run();
             break;
 
         case 'rank':
             $api = new RankAPI();
-            $ret = $api->Run();
             break;
 
         default:
-            $ret = ['error' => 'bad request'];
-            break;
+            return ['error' => 'bad request'];
         }
 
-        return $ret;
+        return $api->Run();
     }
 
     protected function ConnectDB () : object
