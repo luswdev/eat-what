@@ -46,7 +46,7 @@ class RegionAPI extends API
     {
         $query = 'INSERT RegionList(RegionID, RegionName, UpdatedFrom) VALUES (?, ?, ?)';
         $stmt  = $this->conn->prepare($query);
-    
+
         $stmt->bind_param('sss', $this->id, $this->new, $this->ip);
         $stmt->execute();
         $stmt->close();
@@ -57,7 +57,7 @@ class RegionAPI extends API
     {
         $query = 'DELETE FROM RegionList WHERE RegionName=?';
         $stmt  = $this->conn->prepare($query);
-    
+
         $stmt->bind_param('s', $this->del);
         $stmt->execute();
         $stmt->close();
@@ -75,10 +75,10 @@ class RegionAPI extends API
         $stmt->bind_result($backupName);
         $stmt->fetch();
         $stmt->close();
-    
+
         $query = 'UPDATE RegionList SET RegionName=?, UpdatedFrom=?, BackupName=? WHERE RegionID=?';
         $stmt  = $this->conn->prepare($query);
-    
+
         $stmt->bind_param('ssss', $this->new, $this->ip, $backupName, $this->regid);
         $stmt->execute();
         $stmt->close();
@@ -94,16 +94,16 @@ class RegionAPI extends API
     
         $stmt->execute();
         $stmt->bind_result($rid, $reg);
-    
+
         while ($stmt->fetch()) {
             $regs[] = [
                 'name' => $rid,
                 'title' => $reg,
             ];
         }
-    
+
         $stmt->close();
-    
+
         return $regs;
     }
 }

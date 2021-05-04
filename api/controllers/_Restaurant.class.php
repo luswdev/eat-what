@@ -49,7 +49,7 @@ class RestaurantAPI extends API
     {
         $query = 'INSERT RestaurantList(restaurant, OpenTime, Region, UpdatedFrom, BackupName) VALUES (?, ?, ?, ?, ?)';
         $stmt  = $this->conn->prepare($query);
-        
+
         $stmt->bind_param('sssss', $this->res, $this->when, $this->list, $this->ip, $this->res);
         $stmt->execute();
         $stmt->close();
@@ -71,16 +71,16 @@ class RestaurantAPI extends API
 
         $query = 'SELECT Restaurant FROM RestaurantList WHERE RID=?';
         $stmt  = $this->conn->prepare($query);
-    
+
         $stmt->bind_param('s', $this->resid);
         $stmt->execute();
         $stmt->bind_result($backupName);
         $stmt->fetch();
         $stmt->close();
-    
+
         $query = 'UPDATE RestaurantList SET BackupName=?, Restaurant=?, UpdatedFrom=? WHERE RID=?';
         $stmt  = $this->conn->prepare($query);
-    
+
         $stmt->bind_param('ssss', $backupName, $this->res, $this->ip, $this->resid);
         $stmt->execute();
         $stmt->close();
@@ -127,7 +127,7 @@ class RestaurantAPI extends API
             'brunch' => $brunch,
             'dinner' => $dinner,
         ];
-        
+
         return $food;
     }
 }

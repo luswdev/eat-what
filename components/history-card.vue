@@ -7,9 +7,18 @@
         <div class="card-body">
             <h5 class="card-title">
                 <i class="fas fa-clock"></i>
-                我決定了 {{histories.length}} 次！
+                <span>我決定了 {{histories.length}} 次！</span>
+                <div class="d-md-inline-block d-none float-md-end fs-6">
+                    <span class="fw-normal">一目</span>
+                    <select class="form-select form-select-sm d-inline w-auto" id="viewSelect" aria-label="viewSelect" v-model="rowPerView">
+                        <option v-for="cnt in viewOption" :value="cnt" :key="cnt">
+                            {{cnt == -1 ? '&#8734;' : cnt}}
+                        </option>
+                    </select>
+                    <span class="fw-normal">行！</span>
+                </div>
             </h5>
-            <div class="table-responsive-sm">
+            <div class="table-responsive-md">
                 <table class="table">
                     <thead>
                         <tr>
@@ -53,40 +62,48 @@ module.exports = {
             displayEntries: this.histories.slice(0, 10),
             currentIdx: 0,
             previewBtn: false,
-            nextBtn: true
+            nextBtn: true,
+            viewOption: [10, 20, 50, 100, -1],
+            rowPerView: 10
         }
     },
     methods: {
         Preview10: function () {
-            if (this.currentIdx - 10 >= 0) {
-                this.displayEntries = this.histories.slice(this.currentIdx - 10, this.currentIdx)
-                this.currentIdx -= 10
+            if (this.currentIdx - this.rowPerView >= 0) {
+                this.displayEntries = this.histories.slice(this.currentIdx - this.rowPerView, this.currentIdx)
+                this.currentIdx -= this.rowPerView
             } else {
-                this.displayEntries = this.histories.slice(0, 10)
+                this.displayEntries = this.histories.slice(0, this.rowPerView)
                 this.currentIdx = 0
             }
             this.UpdateButton()
         },
         Next10: function () {
-            if (this.histories.length >= this.currentIdx + 20) {
-                this.displayEntries = this.histories.slice(this.currentIdx + 10, this.currentIdx + 20)
-                this.currentIdx += 10
+            if (this.histories.length >= this.currentIdx + this.rowPerView * 2) {
+                this.displayEntries = this.histories.slice(this.currentIdx + this.rowPerView, this.currentIdx + this.rowPerView * 2)
+                this.currentIdx += this.rowPerView
             } else {
-                this.displayEntries = this.histories.slice(this.currentIdx + 10, this.histories.length)
+                this.displayEntries = this.histories.slice(this.currentIdx + this.rowPerView, this.histories.length)
                 this.currentIdx = this.histories.length
             }
             this.UpdateButton()
+            console.log(this.currentIdx)
         },
         UpdateButton: function () {
-            if (this.currentIdx != 0) {
-                this.previewBtn = true
-            } else {
+            if (this.rowPerView == -1) {
+                this.nextBtn = false;
                 this.previewBtn = false
-            }
-            if (this.currentIdx != this.histories.length) {
-                this.nextBtn = true
             } else {
-                this.nextBtn = false
+                if (this.currentIdx != 0) {
+                    this.previewBtn = true
+                } else {
+                    this.previewBtn = false
+                }
+                if (this.currentIdx != this.histories.length) {
+                    this.nextBtn = true
+                } else {
+                    this.nextBtn = false
+                }
             }
         },
         WatchIP: function (ip) {
@@ -95,10 +112,22 @@ module.exports = {
     },
     watch: {
         histories: function (newEntries) {
-            this.displayEntries = newEntries.slice(0, 10)
-            this.currentIdx = 0
-            this.previewBtn = false
-            this.nextBtn = true
+            if (this.rowPerView == -1) {
+                this.displayEntries = newEntries;
+                this.currentIdx = 0
+            } else {
+                this.displayEntries = newEntries.slice(0, this.rowPerView)
+                this.currentIdx = 0
+            }
+            this.UpdateButton()
+        },
+        rowPerView: function (newVal) {
+            if (newVal == -1) {
+                this.displayEntries = this.histories;
+            } else {
+                this.displayEntries = this.histories.slice(this.currentIdx, this.currentIdx + newVal)
+            }
+            this.UpdateButton()
         }
     }
 }

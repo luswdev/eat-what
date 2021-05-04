@@ -37,12 +37,12 @@ class PickedLogAPI extends API
     {
         $query = 'INSERT PickedLog(RID, PickFrom) VALUES (?, ?)';
         $stmt  = $this->conn->prepare($query);
-    
+
         $stmt->bind_param('ss', $this->update, $this->ip);
         $stmt->execute();
-    
+
         $LastID = $this->conn->insert_id;
-    
+
         $stmt->close();
 
         return $LastID;
@@ -60,7 +60,7 @@ class PickedLogAPI extends API
         $ip_r = false;
         $stmt->execute();
         $stmt->bind_result($pid, $res, $when, $time, $ip_r);
-    
+
         $history = [];
         while($stmt->fetch()) {
             $when = $when == 'brunch' ? '早餐' : '晚餐';
@@ -72,9 +72,9 @@ class PickedLogAPI extends API
                 'ip' => $ip_r
             ];
         }
-    
+
         $stmt->close();
-    
+
         return $history;
     }
 }
