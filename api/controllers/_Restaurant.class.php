@@ -98,6 +98,7 @@ class RestaurantAPI extends API
         $stmt->execute();
         $stmt->bind_result($rid, $res);
 
+        $brunch = [];
         while ($stmt->fetch()) {
             $brunch[] = [
                 'rid' => $rid,
@@ -114,6 +115,7 @@ class RestaurantAPI extends API
         $stmt->execute();
         $stmt->bind_result($rid, $res);
 
+        $dinner = [];
         while ($stmt->fetch()) {
             $dinner[] = [
                 'rid' => $rid,
