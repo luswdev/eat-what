@@ -2,6 +2,7 @@
 
 body {
     font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
+    overflow-x: hidden;
 }
 
 * {

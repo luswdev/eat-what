@@ -32,7 +32,8 @@
                     <tbody>
                         <tr v-for="row in displayEntries" :key="row.pid">
                             <th scope="row">{{row.pid}}</th>
-                            <td>{{row.restaurant}}</td>
+                            <td v-if="row.restaurant != null">{{row.restaurant}}</td>
+                            <td v-else class="fst-italic" :class="darkTheme ? 'text-white-50' : 'text-black-50'">（已刪除的餐廳）</td>
                             <td>{{row.when}}</td>
                             <td class="font-monospace" @click="WatchIP(row.ip)">{{row.ip}}</td>
                             <td class="font-monospace">{{row.time}}</td>
@@ -56,9 +57,10 @@
 
 <script>
 module.exports = {
-    props: ['histories', 'aostype'],
+    props: ['theme', 'histories', 'aostype'],
     data: function () {
         return {
+            darkTheme: true,
             displayEntries: this.histories.slice(0, 10),
             currentIdx: 0,
             previewBtn: false,
@@ -87,7 +89,6 @@ module.exports = {
                 this.currentIdx = this.histories.length
             }
             this.UpdateButton()
-            console.log(this.currentIdx)
         },
         UpdateButton: function () {
             if (this.rowPerView == -1) {
@@ -112,6 +113,7 @@ module.exports = {
     },
     watch: {
         histories: function (newEntries) {
+            this.histories = newEntries;
             if (this.rowPerView == -1) {
                 this.displayEntries = newEntries;
                 this.currentIdx = 0
@@ -122,12 +124,16 @@ module.exports = {
             this.UpdateButton()
         },
         rowPerView: function (newVal) {
+            this.rowPerView = newVal;
             if (newVal == -1) {
                 this.displayEntries = this.histories;
             } else {
                 this.displayEntries = this.histories.slice(this.currentIdx, this.currentIdx + newVal)
             }
             this.UpdateButton()
+        },
+        theme: function (newVal) {
+            this.darkTheme = newVal
         }
     }
 }

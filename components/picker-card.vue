@@ -47,6 +47,7 @@ module.exports = {
                 dinner: 'dinner',
                 current: ''
             },
+            resultTitle: '今天，我想來點，',
         }
     },
     methods: {
@@ -55,7 +56,7 @@ module.exports = {
             if (this.openCnt > 10) {
                 this.openCnt = 0
                 Swal.fire({
-                    title: '那就吃...',
+                    title: this.resultTitle,
                     text: '自己想啦幹',
                     icon: 'error',
                     buttonsStyling: false,
@@ -75,7 +76,7 @@ module.exports = {
 
             if (!pool || !pool.length) {
                 Swal.fire({
-                    title: '那就吃...',
+                    title: this.resultTitle,
                     text: '我也不知道要吃什麼，呵呵',
                     icon: 'warning',
                     buttonsStyling: false,
@@ -91,7 +92,7 @@ module.exports = {
             var poolIdx = this.RandomRange(pool.length)
             this.restaurantResult = pool[poolIdx].restaurant
             Swal.fire({
-                title: '那就吃...',
+                title: this.resultTitle,
                 html: `<b class="result-name">${this.restaurantResult}</b>，你說好不好？`,
                 showCancelButton: true,
                 buttonsStyling: false,

@@ -3,7 +3,7 @@
 <script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
 
 <template>
-    <button title="Back to top" class="btn position-fixed bottom-0 end-0 m-3" :class="darkTheme ? 'btn-secondary' : 'bg-light'"
+    <button title="Back to top" class="btn position-fixed bottom-0 end-0 m-3" :class="darkTheme ? 'btn-secondary' : 'btn-light'"
         @click="backToTop" id="b2t" :style="styles">
         <i class="fas fa-chevron-up"></i>
     </button>

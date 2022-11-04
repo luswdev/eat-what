@@ -58,8 +58,7 @@ module.exports = {
                 return
             }
 
-            API.post('api', {
-                'type': 'region',
+            API.post('region', {
                 'new': this.newRegion.title,
                 'id': this.newRegion.name
             }).then( () => {
@@ -90,8 +89,7 @@ module.exports = {
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    API.delete('api', { 
-                        'type': 'region',
+                    API.delete('region', {
                         'del': name,
                     }).then( () => {
                         this.$parent.GetRegionList()
@@ -130,8 +128,7 @@ module.exports = {
 
                 let value = ret.value
                 if (value != reg.title) {
-                    API.post('api', {
-                        'type': 'region',
+                    API.post('region', {
                         'reg': reg.name,
                         'new': value
                     }).then( () => {
