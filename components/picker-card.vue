@@ -102,7 +102,8 @@ module.exports = {
                 customClass: {
                     confirmButton: 'btn btn-danger mx-1',
                     cancelButton: 'btn btn-primary mx-1'
-                }
+                },
+                onOpen: () => Swal.getCancelButton().blur()
             }).then( (result) => {
                 API.post('picked-log', {
                     'rid': pool[poolIdx].rid,
