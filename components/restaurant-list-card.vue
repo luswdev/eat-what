@@ -19,7 +19,7 @@
             <li class="list-group-item">
                 <form @submit.prevent="AddRestaruant">
                     <div class="input-group mb-3">
-                        <input class="form-control" type="text" placeholder="吃這家早餐啦" aria-label="new brunch" v-model="newRestaurant">
+                        <input class="form-control" type="text" :placeholder="'吃這家' + (type === 'brunch' ? '早餐' : '晚餐') + '啦'" aria-label="new brunch" v-model="newRestaurant">
                         <button title="add restaurant" type="button" class="btn btn-secondary" :disabled="newRestaurant === ''" @click="AddRestaruant"><i class="fas fa-plus"></i></button>
                     </div>
                 </form>
